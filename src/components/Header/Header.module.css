@@ -1,0 +1,22 @@
+/* src/components/TopNav.css */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 1030; /* above sidebar */
+  min-height: 56px;
+}
+
+.topnav__search .form-control:focus {
+  box-shadow: none;
+}
+
+.btn.btn-icon {
+  line-height: 1;
+}
+
+@media (max-width: 767.98px) {
+  .topnav {
+    padding-left: .5rem;
+    padding-right: .5rem;
+  }
+}

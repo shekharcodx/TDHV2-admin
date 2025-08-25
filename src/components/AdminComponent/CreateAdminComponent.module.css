@@ -1,0 +1,57 @@
+.createAdminPage {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 12px;
+    min-height: 100vh;
+  }
+  
+  .pageTitle {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #4e6a6e;
+  }
+  
+  .formCard {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  
+  .label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .input, .select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  .input:focus, .select:focus {
+    border-color: #18335D;
+    box-shadow: 0 0 0 2px rgba(24, 51, 93, 0.2);
+  }
+  
+  .primaryBtn {
+    background-color: #4e6a6e;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .primaryBtn:hover {
+    background-color: #0f2440;
+  }
+  

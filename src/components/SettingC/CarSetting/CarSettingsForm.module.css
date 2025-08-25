@@ -1,0 +1,725 @@
+/* CarSettingsForm.css - Updated with CSS Variables */
+
+:root {
+  --charcoal-blue-grey-one-color: #27343A;
+  --slate-gray-secondary-two-color: #5B787C;
+  --misty-teal-three-color: #89B4BC;
+  --light-gray-four-color: #CECCCD;
+  --neutral-five-color: #EFEEEA;
+  --Gradient-background: #5B787C;
+  --Gradient-background: linear-gradient(90deg, rgba(91, 120, 124, 1) 0%, rgba(137, 180, 188, 1) 35%);
+}
+
+
+/* Main Wrapper */
+.carSettingsWrapper {
+  min-height: 100vh;
+  /* background: var(--neutral-five-color); */
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container */
+.carSettingsContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Header */
+.carSettingsHeader {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.carSettingsTitle {
+  color: var(--charcoal-blue-grey-one-color);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Container */
+.carSettingsForm {
+  /* background: rgba(255, 255, 255, 0.95); */
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); */
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  position: relative;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Grid System */
+.carSettingsRow {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px 1.5rem -15px;
+}
+
+.carSettingsColFull {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding: 0 15px;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.carSettingsColFull button {
+  border: none;
+  color: #fff;
+  background: var(--Gradient-background);
+}
+
+.carSettingsColHalf {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 0 15px;
+}
+
+.carSettingsColThird {
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+  padding: 0 15px;
+}
+
+/* Labels */
+.carSettingsLabel {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--slate-gray-secondary-two-color);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Input Groups */
+.carSettingsInputGroup {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+}
+
+/* Inputs */
+.carSettingsInput {
+  flex: 1;
+  padding: 15px 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 16px;
+  color: var(--slate-gray-secondary-two-color);
+  background: #ffffff;
+  transition: all 0.3s ease;
+  outline: none;
+  font-family: inherit;
+  width: 100%;
+}
+
+/* Input Group Inputs */
+.carSettingsInputGroup .carSettingsInput {
+  border-radius: 12px 0 0 12px;
+}
+
+/* Select Styling */
+.carSettingsInput select,
+select.carSettingsInput {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Input States */
+.carSettingsInput:focus {
+  border-color: var(--misty-teal-three-color);
+  box-shadow: 0 0 0 3px rgba(137, 180, 188, 0.1);
+}
+
+
+/* Main Container */
+.car-settings-container {
+  min-height: 100vh;
+  background: var(--neutral-five-color);
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.carSettingsInputGroup button {
+  background-color: var(--slate-gray-secondary-color);
+  color: white;
+  border-radius: 0px 6px 6px 0px;
+}
+
+
+
+/* Form Header */
+.form-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.form-title {
+  color: var(--charcoal-blue-grey-one-color);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Form Container */
+.car-settings-form {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+/* Form Labels */
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--slate-gray-secondary-two-color);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Input Groups */
+.input-group {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+}
+
+/* Custom Inputs */
+.custom-input {
+  flex: 1;
+  padding: 15px 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px 0 0 12px;
+  font-size: 16px;
+  color: var(--slate-gray-secondary-two-color);
+  background: #ffffff;
+  transition: all 0.3s ease;
+  outline: none;
+  font-family: inherit;
+}
+
+/* Select Dropdown Styling */
+.custom-input select,
+select.custom-input {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.custom-input:disabled {
+  background-color: #f7fafc;
+  color: var(--light-gray-four-color);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.custom-input:focus {
+  border-color: var(--misty-teal-three-color);
+  box-shadow: 0 0 0 3px rgba(137, 180, 188, 0.1);
+  transform: translateY(-1px);
+}
+
+.custom-input::placeholder {
+  color: var(--misty-teal-three-color);
+  font-style: italic;
+}
+
+/* File Input Specific */
+.file-input {
+  border-radius: 12px !important;
+  padding: 12px 20px;
+}
+
+.file-input::-webkit-file-upload-button {
+  background: var(--misty-teal-three-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 15px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.file-input::-webkit-file-upload-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(137, 180, 188, 0.3);
+}
+
+/* Add Buttons */
+.btn-add {
+  background: var(--misty-teal-three-color);
+  border: none;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 0 12px 12px 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  min-width: 90px;
+  justify-content: center;
+}
+
+.btn-add:hover {
+  background: var(--slate-gray-secondary-two-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(91, 120, 124, 0.3);
+}
+
+.btn-add:active {
+  transform: translateY(0);
+}
+
+.icon-plus {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Added Items Display */
+.added-items {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.item-tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--misty-teal-three-color);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  gap: 8px;
+  animation: fadeInScale 0.3s ease;
+}
+
+.item-tag button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.item-tag button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Feature Section */
+.feature-section {
+  margin: 40px 0;
+  padding: 30px;
+  background: var(--neutral-five-color);
+  border-radius: 15px;
+  border: 1px solid #e2e8f0;
+}
+
+.section-title {
+  color: var(--slate-gray-secondary-two-color);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: center;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--misty-teal-three-color);
+  border-radius: 2px;
+}
+
+/* Save Feature Button */
+.btn-save-feature {
+  background: var(--misty-teal-three-color);
+  border: none;
+  color: white;
+  padding: 15px 35px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-save-feature:hover {
+  background: var(--slate-gray-secondary-two-color);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(91, 120, 124, 0.3);
+}
+
+.btn-save-feature:active {
+  transform: translateY(0);
+}
+
+/* Submit Button */
+.btn-submit {
+  background: var(--misty-teal-three-color);
+  border: none;
+  color: white;
+  padding: 20px 50px;
+  border-radius: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: 100%;
+  margin-top: 30px;
+  box-shadow: 0 10px 30px rgba(137, 180, 188, 0.3);
+}
+
+.btn-submit:hover {
+  background: var(--slate-gray-secondary-two-color);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(91, 120, 124, 0.4);
+}
+
+.btn-submit:active {
+  transform: translateY(-1px);
+}
+
+/* Standalone Inputs (without buttons) */
+.custom-input:not(.file-input) {
+  border-radius: 12px;
+}
+
+.input-group .custom-input {
+  border-radius: 12px 0 0 12px;
+}
+
+/* Input Hover Effects */
+.custom-input:hover {
+  border-color: #cbd5e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Animation for form load */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.car-settings-form {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Number Input Arrows */
+.custom-input[type="number"]::-webkit-outer-spin-button,
+.custom-input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.custom-input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Focus States */
+.custom-input:focus + .btn-add {
+  border-left: 2px solid var(--misty-teal-three-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .car-settings-container {
+    padding: 20px 10px;
+  }
+  
+  .car-settings-form {
+    padding: 25px 20px;
+    border-radius: 15px;
+  }
+  
+  .form-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .custom-input {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+  
+  .btn-add {
+    padding: 12px 20px;
+    font-size: 12px;
+    min-width: 75px;
+  }
+  
+  .btn-submit {
+    padding: 15px 30px;
+    font-size: 16px;
+  }
+  
+  .btn-save-feature {
+    padding: 12px 25px;
+    font-size: 14px;
+  }
+  
+  .feature-section {
+    padding: 20px;
+    margin: 30px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .input-group {
+    flex-direction: column;
+  }
+  
+  .custom-input {
+    border-radius: 12px 12px 0 0;
+  }
+  
+  .btn-add {
+    border-radius: 0 0 12px 12px;
+    justify-content: center;
+  }
+  
+  .car-settings-form {
+    padding: 20px 15px;
+  }
+  
+  .form-title {
+    font-size: 1.8rem;
+  }
+
+  .added-items {
+    margin-top: 8px;
+  }
+
+  .item-tag {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+}
+
+/* Loading States */
+.btn-add:disabled,
+.btn-save-feature:disabled,
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Custom Scrollbar */
+.car-settings-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.car-settings-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.car-settings-container::-webkit-scrollbar-thumb {
+  background: var(--misty-teal-three-color);
+  border-radius: 10px;
+}
+
+.car-settings-container::-webkit-scrollbar-thumb:hover {
+  background: var(--slate-gray-secondary-two-color);
+}
+
+/* Error States */
+.custom-input.error {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+}
+
+.custom-input.error:focus {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.2);
+}
+
+/* Success States */
+.custom-input.success {
+  border-color: var(--misty-teal-three-color);
+  box-shadow: 0 0 0 3px rgba(137, 180, 188, 0.1);
+}
+
+/* Glassmorphism Effect Enhancement */
+.car-settings-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+/* Enhanced Button Gradients */
+.btn-add {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-add::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-add:hover::before {
+  left: 100%;
+}
+
+/* Form Validation Visual Feedback */
+.input-group.has-success .custom-input {
+  border-color: var(--misty-teal-three-color);
+}
+
+.input-group.has-success .btn-add {
+  background: var(--misty-teal-three-color);
+}
+
+.input-group.has-error .custom-input {
+  border-color: #e53e3e;
+}
+
+.input-group.has-error .btn-add {
+  background: #e53e3e;
+}
+
+/* Empty state for added items */
+.added-items:empty {
+  display: none;
+}
+
+/* Transition effects for dynamic content */
+.car-settings-form > .row {
+  transition: all 0.3s ease;
+}
+
+/* Focus ring for accessibility */
+.btn-add:focus,
+.btn-submit:focus,
+.btn-save-feature:focus {
+  outline: 2px solid var(--misty-teal-three-color);
+  outline-offset: 2px;
+}
+
+/* Improved select styling for better UX */
+select.custom-input option {
+  padding: 10px;
+  background-color: white;
+  color: var(--slate-gray-secondary-two-color);
+}
+
+select.custom-input option:disabled {
+  color: var(--light-gray-four-color);
+  background-color: #f9f9f9;
+}
+
+/* Better visual feedback for disabled state */
+.custom-input:disabled + .btn-add {
+  background: var(--light-gray-four-color);
+  cursor: not-allowed;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  box-sizing: border-box;
+}
+
+.custom-input,
+.btn-add,
+.btn-submit,
+.btn-save-feature,
+.item-tag button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

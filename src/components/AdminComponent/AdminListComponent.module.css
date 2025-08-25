@@ -1,0 +1,93 @@
+.adminListPage {
+  padding: 20px;
+  /* background: #f9fafb; */
+}
+
+.subTitle {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #27343a;
+}
+
+.adminTable th {
+  background:#f8fafc;
+  color: #1e293b;
+  text-align: center;
+  font-weight: 500;
+}
+
+.adminTable td {
+  vertical-align: middle;
+  text-align: center;
+}
+/* .table-responsive {
+  background: #fff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06) !important;
+} */
+
+.superRole {
+  padding: 5px 10px;
+  background: #18335d;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.moderatorRole {
+  padding: 5px 10px;
+  background: #5b787c;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.statusDropdown {
+  padding: 5px 8px;
+  border: 1px solid #cecccd;
+  border-radius: 6px;
+  font-size: 13px;
+  background: #fff;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.statusText {
+  font-size: 13px;
+  font-weight: 500;
+  color: #27343a;
+}
+
+.viewBtn {
+  background: #e2e8f0;
+  border: none;
+  color: #1e293b;
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin-right: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.viewBtn:hover {
+  color: #fff;
+  background: #5b787c;
+}
+
+.deleteBtn {
+  background: #e2e8f0;
+  border: none;
+  color: #1e293b;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.deleteBtn:hover {
+  color: #fff;
+  background: #a71d2a;
+}

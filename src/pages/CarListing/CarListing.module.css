@@ -1,0 +1,104 @@
+:root {
+  --charcoal-blue-grey-color: #27343a;
+  --slate-gray-secondary-color: #5b787c;
+  --misty-teal-color: #89b4bc;
+  --light-gray-color: #cecccd;
+  --neutral-color: #efeeea;
+}
+
+.carListingPage {
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.subTitle {
+  color: var(--charcoal-blue-grey-color);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Tabs */
+.tabs {
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.tabButton {
+  padding: 6px 14px;
+  border: 1px solid var(--light-gray-color);
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--charcoal-blue-grey-color);
+}
+
+.tabButton:hover {
+  background-color: var(--misty-teal-color);
+  color: white;
+}
+
+.activeTab {
+  background-color: var(--slate-gray-secondary-color);
+  color: white;
+}
+
+/* Table */
+.carTable {
+  border: 1px solid var(--light-gray-color);
+  background-color: white;
+}
+
+.carTable th {
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+
+.carTable td {
+  vertical-align: middle;
+}
+
+.carThumbnail {
+  width: 50px;
+  height: auto;
+  margin-right: 8px;
+  border-radius: 4px;
+}
+
+.statusDropdown {
+  border: 1px solid var(--light-gray-color);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: white;
+  z-index: 1000;
+  position: relative;
+}
+
+.viewBtn {
+  border: none;
+  background-color: #e2e8f0;
+  color: #1e293b;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.viewBtn:hover {
+  color:#fff;
+  background-color: var(--charcoal-blue-grey-color);
+}
+
+/* Modal */
+.carDetails {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.carLargeImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}

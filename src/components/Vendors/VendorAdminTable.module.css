@@ -1,0 +1,131 @@
+/* Layout + header */
+.title { color:#1e293b; font-weight:800; margin-bottom:4px; }
+.subtitle { color:#6b7280; margin:0; }
+.kpis { text-align:right; }
+.kpiRow { color:#6b7280; margin-bottom:6px; font-size:12px; }
+.kpiLabel { margin-right:6px; }
+.kpiValue { color:#111827; font-weight:700; }
+
+/* Chips for counts */
+.chip { display:inline-block; padding:6px 10px; border-radius:999px; font-weight:600; font-size:12px; }
+.chipPending { background:#fff7ed; color:#9a3412; border:1px solid #fdba74; }
+.chipApproved { background:#ecfeff; color:#075985; border:1px solid #67e8f9; }
+.chipHold { background:#fef2f2; color:#7f1d1d; border:1px solid #fecaca; }
+.chipRejected { background:#f8fafc; color:#334155; border:1px solid #cbd5e1; }
+
+/* Table wrapper */
+.vendorTable { background:#fff; border:1px solid #e5e7eb; border-radius:0.375rem; overflow:hidden; box-shadow:0 4px 14px rgba(0,0,0,0.06); }
+.tableHead th {background-color: #f8fafc; color:#1e293b; font-weight:600; letter-spacing:.3px; }
+/* .tableRow { cursor:pointer; transition:transform .15s ease, background-color .15s ease, border-left-color .15s ease; border-left:3px solid transparent; } */
+/* .tableRow:hover { background:#f8fafc !important; border-left-color:#0ea5e9; transform:translateX(1px); } */
+
+.checkbox { width:16px; height:16px; border:1px solid #cbd5e1; border-radius:4px; }
+.muted { color:#6b7280; }
+.small { font-size:12px; }
+.mutedMono { color:#64748b; font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:12px; }
+.personName { color:#111827; font-weight:600; }
+.truncate { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.company { max-width:180px; }
+
+/* Avatar */
+.avatar { width:40px; height:40px; object-fit:cover; border-radius:999px; margin-right:12px; }
+
+/* Status badge */
+.statusBadge { font-size:.75rem; font-weight:700; padding:.35rem .7rem; border-radius:999px; text-transform:uppercase; letter-spacing:.4px; display:inline-block; min-width:84px; text-align:center; transition:all .2s ease; animation:fadeIn .25s ease; }
+.pending { background:#fff3cd; color:#854d0e; border:1px solid #fde68a; }
+.approved { background:#d1edff; color:#075985; border:1px solid #7dd3fc; }
+.hold { background:#fee2e2; color:#7f1d1d; border:1px solid #fecaca; }
+.rejected { background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; }
+
+@keyframes fadeIn { from { opacity:0; transform:scale(.98);} to { opacity:1; transform:scale(1);} }
+
+/* Buttons (global) */
+.btn { border:none; padding:8px 12px; border-radius:8px; font-weight:600; font-size:13px; cursor:pointer; transition:all .2s ease; display:inline-flex; align-items:center; gap:8px; }
+.btn:disabled { opacity:.55; cursor:not-allowed; }
+.btn:hover { transform:translateY(-1px); }
+.btn:active { transform:translateY(0); }
+
+/* Specific buttons */
+.btnStatus { background:#e2e8f0; color:#1e293b;  }
+
+.btnView { background:#e2e8f0; color:#1e293b; }
+
+/* Dropdown */
+.dropdownMenu { border:none; border-radius:10px; box-shadow:0 10px 28px rgba(0,0,0,.15); padding:.5rem 0; }
+.dropdownItem { width:100%; background:transparent; border:none; text-align:left; padding:.6rem 1rem; font-weight:600; font-size:.9rem; display:flex; align-items:center; gap:.5rem; color:#111827; transition:background .15s ease; }
+.dropdownItem:hover { background:#f8fafc; }
+.dropdownActive { background:#e2e8f0; }
+.dot { width:8px; height:8px; border-radius:999px; display:inline-block; }
+.dotPending { background:#f59e0b; }
+.dotApproved { background:#0ea5e9; }
+.dotHold { background:#ef4444; }
+.dotRejected { background:#475569; }
+
+/* Empty table cell */
+.emptyCell { text-align:center; padding:28px; color:#6b7280; }
+
+/* Pagination */
+.pagination { list-style:none; padding-left:0; gap:8px; }
+.pageBtn { background:#CECCCD; color:#4e6a6e; border:none; padding:8px 12px; border-radius:8px; font-weight:600; font-size:13px; min-width:40px; }
+.pageBtn:hover { background:#4e6a6e;color:#fff }
+.pageActive { background:#4e6a6e; color:#fff; }
+.pageDisabled, .pageDisabled:hover { background:#cbd5e1; cursor:not-allowed; }
+
+/* Modal overrides */
+.backdrop { background:rgba(0,0,0,.5); }
+.modalContent { border-radius:14px; overflow:hidden; border:1px solid #e5e7eb; }
+.modalHeader { background:linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-bottom:2px solid #e5e7eb; padding:16px 20px; }
+.modalAvatar { width:50px; height:50px; object-fit:cover; border-radius:999px; margin-right:12px; }
+.modalTitle { color:#111827; font-weight:800; }
+.iconClose { background:transparent; border:none; font-size:20px; line-height:1; padding:6px; color:#475569; border-radius:8px; }
+.iconClose:hover { background:#e2e8f0; }
+
+.card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; }
+.cardHeader { background:#f8fafc; padding:10px 14px; font-weight:700; color:#1f2937; border-bottom:1px solid #e5e7eb; }
+.cardBody { padding:14px; }
+.infoItem { margin-bottom:12px; }
+.infoLabel { display:block; font-size:12px; color:#6b7280; font-weight:700; margin-bottom:4px; }
+.infoValue { color:#111827; font-weight:600; }
+.mono { font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; color:#075985; }
+.description { color:#111827; margin:0; }
+
+.select { width:100%; padding:10px; border:2px solid #e5e7eb; border-radius:10px; transition:border .15s ease, box-shadow .15s; background:#fff; }
+.select:focus { outline:none; border-color:#0ea5e9; box-shadow:0 0 0 3px rgba(14,165,233,.2); }
+
+.modalFooter { background:#f8fafc; border-top:1px solid #e5e7eb; padding:12px 16px; display:flex; justify-content:flex-end; gap:10px; }
+.btnGhost { background:#e5e7eb; color:#111827; }
+.btnGhost:hover { background:#d1d5db; }
+.btnPrimary { background:#0ea5e9; color:#fff; }
+.btnPrimary:hover { background:#0284c7; }
+
+
+/* Dropdown */
+.dropdownMenu { 
+  border:none; 
+  border-radius:10px; 
+  box-shadow:0 10px 28px rgba(0,0,0,.15); 
+  padding:.5rem 0; 
+  position: absolute;   /* ensure it floats */
+  z-index: 9999;        /* ✅ fix: keep it above everything */
+}
+.dropdownItem { 
+  width:100%; 
+  background:transparent; 
+  border:none; 
+  text-align:left; 
+  padding:.6rem 1rem; 
+  font-weight:600; 
+  font-size:.9rem; 
+  display:flex; 
+  align-items:center; 
+  gap:.5rem; 
+  color:#111827; 
+  transition:background .15s ease; 
+}
+.dropdownItem:hover { background:#f8fafc; }
+.dropdownActive { background:#e2e8f0; }
+.dot { width:8px; height:8px; border-radius:999px; display:inline-block; }
+.dotPending { background:#f59e0b; }
+.dotApproved { background:#0ea5e9; }
+.dotHold { background:#ef4444; }
+.dotRejected { background:#475569; }

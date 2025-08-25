@@ -1,0 +1,118 @@
+/* Dashboard.module.css */
+
+/* Card Styling */
+
+.charcoal-blue-grey-one {
+  color:#27343A ;
+}
+.charcoal-blue-grey-bg-one {
+  background-color:#27343A ;
+}
+
+.slate-gray-secondary-two {
+  color:#5B787C ;
+}
+.slate-gray-secondary-bg-two {
+  background-color:#5B787C ;
+}
+.misty-teal-three {
+  color:#89B4BC ;
+}
+.misty-teal-bg-three {
+  background-color:#89B4BC ;
+}
+.light-gray-four {
+  color: #CECCCD ;
+}
+.light-gray-bg-four {
+  background-color: #CECCCD ;
+}
+.neutral-five {
+  color:#EFEEEA;
+}
+.neutral-bg-five {
+  background-color:#EFEEEA ;
+}
+
+
+.statsCard {
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title Styling */
+  .cardTitle {
+    color: #6c757d;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    
+  }
+  
+  /* Value Styling */
+  .cardValue {
+    color: #212529;
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+  
+  /* Icon Container */
+  .iconContainer {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Icon Styling */
+  .icon {
+    color: #ffffff;
+    font-size: 1.25rem;
+  }
+  
+  
+  /* Background Colors */
+  .primary {
+    background-color:#27343A;
+  }
+  
+  .info {
+    background-color: #5B787C;
+  }
+  
+  .warning {
+    background-color: #ffc107;
+  }
+  
+  .success {
+    background-color: #28a745;
+  }
+  
+  .danger {
+    background-color: #dc3545;
+  }
+  
+  .secondary {
+    background-color: #6c757d;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .cardValue {
+      font-size: 1.5rem;
+    }
+    
+    .iconContainer {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .icon {
+      font-size: 1rem;
+    }
+  }

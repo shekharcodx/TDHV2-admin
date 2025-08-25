@@ -1,0 +1,191 @@
+/* src/components/SideNav.css */
+:root {
+  --charcoal-blue-grey-one-color: #27343A;
+  --slate-gray-secondary-two-color: #5B787C;
+  --misty-teal-three-color: #89B4BC;
+  --light-gray-four-color: #CECCCD;
+  --neutral-five-color: #EFEEEA;
+}
+
+.sidebar__link a{
+  color: var(--charcoal-blue-grey-one-color);
+}
+.active {
+  color: #ff000082 !important;
+  font-weight: bold !important;
+}
+
+.innerClrs{
+  color:#CECCCD;
+}
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  /* background: var(--slate-gray-secondary-two-color); */
+  color: var(--slate-gray-secondary-two-color);
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  transition: width .25s ease;
+  border-right: 1px solid #f3f3f3;
+}
+.btn-outline-light{
+border: solid 1px #5B787C;
+}
+
+.ToogleBtn{
+  background-color: #5B787C !important;
+}
+
+.btn:hover{
+  background-color: #ffffff !important;
+}
+.sidebar.is-collapsed { width: 72px; }
+
+/* header */
+.sidebar__header {
+  height: 78px;
+  border-bottom:1px solid rgb(11 11 11 / 6%);
+}
+.sidebar__logo img{
+  width: 130px;
+    margin:0px 0px 10px 20px;
+}
+.sidebar__logo {
+  color: #000000;
+  font-weight: 600;
+}
+
+/* scroll area */
+.sidebar__scroll { overflow-y: auto; max-height: calc(100vh - 56px); }
+
+/* Accordion overrides */
+.sidebar .accordion-button {
+  background: transparent !important;
+  color: #565656 !important;
+  padding: .75rem 1rem;
+  box-shadow: none !important;
+
+  padding: 15px 25px;
+    line-height: 20px;
+    color: #a6aab4;
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 400;
+    white-space: nowrap;
+    display: flex;
+    letter-spacing: 0.02rem;
+    font-size: 0.885rem;
+
+}
+
+.accordion{margin-top: 10px;}
+.sidebar .accordion-button:focus { box-shadow: none; }
+.sidebar .accordion-button:not(.collapsed) {
+  color:#5B787C !important;
+  background: rgba(255,255,255,.04) !important;
+}
+.sidebar .accordion-button:not(.collapsed):before{
+  position: absolute;
+    content: "";
+    left: 5px;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    border-radius: 5px;
+    background: #5B787C;
+    opacity: 1;
+}
+/* .sidebar .accordion-button::after { filter: invert(1) opacity(.9); } */
+.sidebar .accordion-item { 
+  margin-bottom: 0;
+  border-top: 0;
+  margin: 10px 0;
+  /* border-bottom: solid 1px #f3f3f3;  */
+  border-bottom: 0; 
+}
+.sidebar .accordion-button{
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sidebar .accordion-button:hover{
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05)) !important;
+  transform: translateX(4px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    
+}
+.sidebar .accordion-body { padding: .25rem 0 .5rem; }
+
+/* links */
+.sidebar__link {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background-color: #f1f1f1;
+  color: var(--charcoal-blue-grey-one-color);
+  padding: .45rem 1.25rem .45rem 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  border-radius: 0;
+  font-size: 0.88rem;
+}
+.accordion-body ul {
+  background: #f1f1f1;
+}
+.sidebar__link:hover,
+.sidebar__link:focus {
+  color: #1412129f;
+  background: rgba(255,255,255,.06);
+}
+
+/* icon/label visibility in collapsed */
+.sidebar.is-collapsed .accordion-button .sidebar__label,
+.sidebar.is-collapsed .accordion-body,
+.sidebar.is-collapsed .sidebar__logo {
+  display: none !important;
+}
+.sidebar.is-collapsed .accordion-button {
+  justify-content: center;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+.sidebar__icon {
+  width: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--charcoal-blue-grey-one-color);
+
+
+  float: left;
+    margin-right: 0.94rem;
+    width: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 1.5rem;
+}
+
+/* Hide Bootstrap default caret */
+.accordion-button::after {
+  display: none !important;
+}
+
+/* Lucide arrow styling */
+.accordion-arrow {
+  margin-left: auto;
+  transition: transform 0.3s ease;
+  color: #565656;
+}
+
+/* Rotate when expanded */
+.accordion-button:not(.collapsed) .accordion-arrow {
+  transform: rotate(180deg);
+}
+
+
+/* responsive tweaks */
+@media (max-width: 991.98px) {
+  .sidebar { position: fixed; left: 0; top: 0; height: 100vh; }
+}
