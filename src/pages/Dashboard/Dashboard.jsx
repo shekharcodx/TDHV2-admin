@@ -3,6 +3,7 @@ import React from "react";
 import Dashboardstyles from './Dashboard.module.css';
 import RecentOrders from "./RecentOrders";
 
+
 const orders = [
     {
       id: 24541,
@@ -174,6 +175,7 @@ const Dashboard = () => {
         ))}
       </div>
     </div>
+    
     <br /><br /><br />
     <RecentOrders />
     </>

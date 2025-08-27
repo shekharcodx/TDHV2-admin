@@ -1,0 +1,69 @@
+/* ================================
+   🌍 Global Styles & Variables
+   ================================ */
+
+/* CSS Variables */
+:root {
+  --charcoal-blue-grey-one-color: #27343a;
+  --slate-gray-secondary-two-color: #5b787c;
+  --misty-teal-three-color: #89b4bc;
+  --light-gray-four-color: #cecccd;
+  --neutral-five-color: #efeeea;
+
+  --gradient-background: linear-gradient(
+    90deg,
+    rgba(91, 120, 124, 1) 0%,
+    rgba(137, 180, 188, 1) 35%
+  );
+}
+.Paragraph {
+  font-size: 0.885rem;
+  font-weight: 400;
+}
+.HeadingStyle {
+  color: var(--charcoal-blue-grey-one-color) !important;
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Reset / Base Styles */
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  } */
+
+body {
+  font-family: "Inter", Arial, sans-serif;
+  background-color: var(--neutral-five-color);
+  color: var(--charcoal-blue-grey-one-color);
+  line-height: 1.6;
+}
+
+/* Utility Classes */
+.text-primary {
+  color: var(--charcoal-blue-grey-one-color);
+}
+
+.text-secondary {
+  color: var(--slate-gray-secondary-two-color);
+}
+
+.bg-gradient {
+  background: var(--gradient-background);
+}
+
+.btn-custom {
+  background: var(--charcoal-blue-grey-one-color);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+  background: var(--slate-gray-secondary-two-color);
+}

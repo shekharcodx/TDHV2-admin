@@ -217,7 +217,7 @@ const VendorAdminTable = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className={styles.tableBodySetting}>
                   {currentVendors.map((vendor) => (
                     <tr
                       key={vendor.id}

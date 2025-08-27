@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./Carform.module.css";
+import styles from "./CarForm.module.css";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
 const CarForm = () => {
@@ -12,7 +12,7 @@ const CarForm = () => {
 
   const [trimInput, setTrimInput] = useState("");
 
-  // Add Brand
+  // ------------------ BRAND ------------------ //
   const addBrand = () => {
     if (brandInput.trim() !== "") {
       setBrands([...brands, { name: brandInput, models: [] }]);
@@ -20,7 +20,6 @@ const CarForm = () => {
     }
   };
 
-  // Delete Brand
   const deleteBrand = (brandName) => {
     setBrands(brands.filter((b) => b.name !== brandName));
     if (selectedBrand === brandName) {
@@ -29,7 +28,11 @@ const CarForm = () => {
     }
   };
 
-  // Add Model
+  const submitBrandData = () => {
+    alert("All Brands:\n" + JSON.stringify(brands.map((b) => b.name), null, 2));
+  };
+
+  // ------------------ MODEL ------------------ //
   const addModel = () => {
     if (!selectedBrand || modelInput.trim() === "") return;
 
@@ -46,7 +49,6 @@ const CarForm = () => {
     setModelInput("");
   };
 
-  // Delete Model
   const deleteModel = (modelName) => {
     setBrands((prev) =>
       prev.map((brand) =>
@@ -61,7 +63,19 @@ const CarForm = () => {
     if (selectedModel === modelName) setSelectedModel("");
   };
 
-  // Add Trim
+  const submitModelData = () => {
+    const brandObj = brands.find((b) => b.name === selectedBrand);
+    if (!brandObj) {
+      alert("Please select a brand");
+      return;
+    }
+    alert(
+      `Models for ${brandObj.name}:\n` +
+        JSON.stringify(brandObj.models.map((m) => m.name), null, 2)
+    );
+  };
+
+  // ------------------ TRIM ------------------ //
   const addTrim = () => {
     if (!selectedModel || trimInput.trim() === "") return;
 
@@ -82,7 +96,6 @@ const CarForm = () => {
     setTrimInput("");
   };
 
-  // Delete Trim
   const deleteTrim = (trimName) => {
     setBrands((prev) =>
       prev.map((brand) =>
@@ -103,7 +116,24 @@ const CarForm = () => {
     );
   };
 
-  // Submit
+  const submitTrimData = () => {
+    const brandObj = brands.find((b) => b.name === selectedBrand);
+    if (!brandObj) {
+      alert("Please select a brand");
+      return;
+    }
+    const modelObj = brandObj.models.find((m) => m.name === selectedModel);
+    if (!modelObj) {
+      alert("Please select a model");
+      return;
+    }
+    alert(
+      `Trims for ${brandObj.name} → ${modelObj.name}:\n` +
+        JSON.stringify(modelObj.trims, null, 2)
+    );
+  };
+
+  // ------------------ FULL SUBMIT ------------------ //
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -127,20 +157,18 @@ const CarForm = () => {
       },
     ];
 
-    console.log("Final Data:", finalData);
-    alert(JSON.stringify(finalData, null, 2));
+    alert("Full Data:\n" + JSON.stringify(finalData, null, 2));
   };
 
   return (
-    <div className={styles.containerCarform}>
+    // <div className={styles.containerCarform}>
+       <div className={`container ${styles.formWrapper}`}>
+      <div className={styles.yours}>
+        <h1 className={styles.carSettingsTitle}>Update Setting Listing</h1>
+      </div>
 
-        
-
-         <div className={`${styles.yours}`}>
-                  <h1 className={styles.carSettingsTitle}>Update Setting Listing</h1>
-                </div>
       <Form onSubmit={handleSubmit}>
-        {/* Brand Section */}
+        {/* ------------------ BRAND SECTION ------------------ */}
         <div className={styles.box}>
           <h5>Add Car Brand Name</h5>
           <InputGroup className="mb-2">
@@ -166,9 +194,17 @@ const CarForm = () => {
               </span>
             </div>
           ))}
+
+          <Button
+            type="button"
+            className={`${styles.gradientBtn} mt-2`}
+            onClick={submitBrandData}
+          >
+            Save Brands
+          </Button>
         </div>
 
-        {/* Model Section */}
+        {/* ------------------ MODEL SECTION ------------------ */}
         <div className={styles.box}>
           <h5>Select Car Brand + Add New Car Model</h5>
           <Form.Select
@@ -209,9 +245,17 @@ const CarForm = () => {
                 </span>
               </div>
             ))}
+
+          <Button
+            type="button"
+            className={`${styles.gradientBtn} mt-2`}
+            onClick={submitModelData}
+          >
+            Save Models
+          </Button>
         </div>
 
-        {/* Trim Section */}
+        {/* ------------------ TRIM SECTION ------------------ */}
         <div className={styles.box}>
           <h5>Add Car Trim</h5>
           <Form.Select
@@ -255,11 +299,21 @@ const CarForm = () => {
                 </span>
               </div>
             ))}
+
+          <Button
+            type="button"
+            className={`${styles.gradientBtn} mt-2`}
+            onClick={submitTrimData}
+          >
+            Save Trims
+          </Button>
         </div>
-        <div lassName={`${styles.gradientBtnOuter}`}>
-        <Button type="submit" className={`${styles.gradientBtn} mt-3`}>
-          Save Settings
-        </Button>
+
+        {/* ------------------ FULL SUBMIT ------------------ */}
+        <div className={styles.gradientBtnOuter}>
+          <Button type="submit" className={`${styles.gradientBtn} mt-3`}>
+            Save Settings (Full)
+          </Button>
         </div>
       </Form>
     </div>

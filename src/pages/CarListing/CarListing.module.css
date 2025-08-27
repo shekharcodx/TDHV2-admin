@@ -12,9 +12,11 @@
 }
 
 .subTitle {
-  color: var(--charcoal-blue-grey-color);
-  margin-bottom: 20px;
-  font-weight: 600;
+  color: var(--charcoal-blue-grey-one-color) !important;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 10px !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Tabs */

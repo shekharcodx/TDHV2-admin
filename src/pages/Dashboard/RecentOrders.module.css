@@ -1,0 +1,370 @@
+:root {
+  --charcoal-blue-grey-one-color: #27343A;
+  --slate-gray-secondary-two-color: #5B787C;
+  --misty-teal-three-color: #89B4BC;
+  --light-gray-four-color: #CECCCD;
+  --neutral-five-color: #EFEEEA;
+  --gradient-background: linear-gradient(
+    90deg,
+    rgba(91, 120, 124, 1) 0%,
+    rgba(137, 180, 188, 1) 35%
+  );
+}
+
+/* Recent Table Wrapper */
+.RecentTableWrapper {
+  padding: 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Card Styles */
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* Card Header */
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--neutral-five-color);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--charcoal-blue-grey-one-color);
+  margin: 0;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  color: var(--slate-gray-secondary-two-color);
+}
+
+.searchInput {
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border: 1px solid var(--light-gray-four-color);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  width: 220px;
+  transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--misty-teal-three-color);
+  box-shadow: 0 0 0 3px rgba(137, 180, 188, 0.2);
+}
+
+.itemsPerPageDropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.itemsSelect {
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  border: 1px solid var(--light-gray-four-color);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  appearance: none;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.itemsSelect:focus {
+  outline: none;
+  border-color: var(--misty-teal-three-color);
+}
+
+.dropdownIcon {
+  position: absolute;
+  right: 12px;
+  color: var(--slate-gray-secondary-two-color);
+  pointer-events: none;
+}
+
+/* Table Container */
+.tableContainer {
+  overflow-x: auto;
+  width: 100%;
+}
+
+/* Table Styles */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.tableHead {
+  background-color: var(--neutral-five-color);
+}
+
+.tableHead th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--slate-gray-secondary-two-color);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--light-gray-four-color);
+}
+
+.tableBody {
+  background-color: white;
+}
+
+.tableRow {
+  transition: all 0.2s ease;
+  border-bottom: 1px solid var(--neutral-five-color);
+}
+
+.tableRow:hover {
+  background-color: rgba(137, 180, 188, 0.05);
+}
+
+.tableRow td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+/* Order ID */
+.orderId {
+  font-weight: 600;
+  color: var(--misty-teal-three-color);
+}
+
+/* Customer Info */
+.customerInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.customerName {
+  font-weight: 500;
+  color: var(--charcoal-blue-grey-one-color);
+}
+
+.customerAddress {
+  font-size: 0.85rem;
+  color: var(--slate-gray-secondary-two-color);
+  margin-top: 0.25rem;
+}
+
+/* Contact Info */
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactEmail, .contactPhone {
+  font-size: 0.9rem;
+  color: var(--slate-gray-secondary-two-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contactEmail:hover, .contactPhone:hover {
+  color: var(--misty-teal-three-color);
+}
+
+/* Payment Badge */
+.paymentBadge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.creditCard {
+  background-color: rgba(137, 180, 188, 0.15);
+  color: var(--misty-teal-three-color);
+}
+
+.paypal {
+  background-color: rgba(39, 52, 58, 0.1);
+  color: var(--charcoal-blue-grey-one-color);
+}
+
+/* Status Badge */
+.statusBadge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.completed {
+  background-color: rgba(76, 175, 80, 0.15);
+  color: #4CAF50;
+}
+
+.processing {
+  background-color: rgba(255, 152, 0, 0.15);
+  color: #FF9800;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--light-gray-four-color);
+  background: white;
+  color: var(--slate-gray-secondary-two-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionBtn:hover {
+  background: var(--neutral-five-color);
+  color: var(--misty-teal-three-color);
+}
+
+/* Card Footer */
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-top: 1px solid var(--neutral-five-color);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footerInfo {
+  font-size: 0.9rem;
+  color: var(--slate-gray-secondary-two-color);
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pageBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--light-gray-four-color);
+  background: white;
+  color: var(--slate-gray-secondary-two-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pageBtn:hover:not(.disabled) {
+  border-color: var(--misty-teal-three-color);
+  color: var(--misty-teal-three-color);
+}
+
+.pageBtn.active {
+  background: var(--misty-teal-three-color);
+  border-color: var(--misty-teal-three-color);
+  color: white;
+}
+
+.pageBtn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .tableHead th:nth-child(5),
+  .tableBody td:nth-child(5) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .RecentTableWrapper {
+    padding: 1rem;
+  }
+  
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .headerActions {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .searchBox {
+    width: 100%;
+  }
+  
+  .searchInput {
+    width: 100%;
+  }
+  
+  .tableHead th:nth-child(2),
+  .tableBody td:nth-child(2),
+  .tableHead th:nth-child(4),
+  .tableBody td:nth-child(4) {
+    display: none;
+  }
+  
+  .cardFooter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .pagination {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .tableHead th:nth-child(3),
+  .tableBody td:nth-child(3) {
+    display: none;
+  }
+  
+  .pageBtn span {
+    display: none;
+  }
+  
+  .pageBtn {
+    padding: 0.5rem;
+  }
+}

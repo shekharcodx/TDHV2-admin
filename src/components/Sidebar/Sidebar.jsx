@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import LogoNav from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
@@ -32,25 +32,56 @@ import "./Sidebar.css";
 
 const Sidebar = ({ onNavigate }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if screen is mobile and auto-collapse
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const mobile = window.innerWidth < 992;
+      setIsMobile(mobile);
+      if (mobile) {
+        setCollapsed(true);
+      }
+    };
+
+    // Initial check
+    checkScreenSize();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", checkScreenSize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   const handleNavigate = (page) => {
     if (typeof onNavigate === "function") onNavigate(page);
   };
 
- 
+  const toggleSidebar = () => {
+    setCollapsed((prev) => !prev);
+  };
 
   return (
-    <aside className={`sidebar d-flex flex-column ${collapsed ? "is-collapsed" : ""}`}>
+    <aside
+      className={`sidebar d-flex flex-column ${
+        collapsed ? "is-collapsed" : ""
+      }`}
+    >
       {/* Header + Toggle */}
       <div className="sidebar__header d-flex align-items-center justify-content-between px-3">
-        <span className="sidebar__logo text-truncate d-none d-md-inline">
+        <span
+          className={`sidebar__logo text-truncate ${
+            collapsed ? "d-none" : "d-none d-md-inline"
+          }`}
+        >
           <Link to="/dashboard">
             <img src={LogoNav} alt="Logo" />
           </Link>
         </span>
         <button
           className="btn ToogleBtn btn-sm btn-outline-light d-inline-flex align-items-center gap-1"
-          onClick={() => setCollapsed((v) => !v)}
+          onClick={toggleSidebar}
           aria-label="Toggle sidebar"
         >
           <Menu size={16} />
@@ -59,42 +90,69 @@ const Sidebar = ({ onNavigate }) => {
 
       {/* Accordion Menu */}
       <div className="sidebar__scroll">
-        
         <Accordion defaultActiveKey="0" flush className="sidebar-accordion">
           {/* Dashboard */}
           <Accordion.Item eventKey="0">
             <Accordion.Header>
-              <LayoutDashboard size={18} className="me-2" /> <span>Dashboard</span>
-              <ChevronDown className="accordion-arrow" size={16} />
+              <div className="accordion-header-content">
+                <LayoutDashboard size={18} className="accordion-icon" />
+                <span className={`accordion-text ${collapsed ? "d-none" : ""}`}>
+                  Dashboard
+                </span>
+                <ChevronDown
+                  className={`accordion-arrow ${collapsed ? "d-none" : ""}`}
+                  size={16}
+                />
+              </div>
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className={collapsed ? "d-none" : ""}>
               <ul className="list-unstyled mb-0">
                 <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Dashboard")}>
-                   <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "active" : "")}>Overview </NavLink>
-                   
+                  <button
+                    className="sidebar__link"
+                    onClick={() => handleNavigate("Dashboard")}
+                  >
+                    <NavLink
+                      to="/dashboard"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      Overview
+                    </NavLink>
                   </button>
                 </li>
               </ul>
             </Accordion.Body>
           </Accordion.Item>
-          <hr/>
+
+          {!collapsed && <hr />}
+
           {/* Vendors */}
           <Accordion.Item eventKey="1">
             <Accordion.Header>
-              <Users size={18} className="me-2" /> <span>Vendors</span>
-              <ChevronDown className="accordion-arrow" size={16} />
+              <div className="accordion-header-content">
+                <Users size={18} className="accordion-icon" />
+                <span className={`accordion-text ${collapsed ? "d-none" : ""}`}>
+                  Vendors
+                </span>
+                <ChevronDown
+                  className={`accordion-arrow ${collapsed ? "d-none" : ""}`}
+                  size={16}
+                />
+              </div>
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className={collapsed ? "d-none" : ""}>
               <ul className="list-unstyled mb-0">
-              <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Vendor List")}>
-                    <NavLink to="/vendors-list" className={({ isActive }) => (isActive ? "active" : "")}>Vendor List</NavLink>
-                  </button>
-                </li>
                 <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Vendors Profile")}>
-                    <NavLink to="/vendors-profile" className={({ isActive }) => (isActive ? "active" : "")}> Vendors Profile</NavLink>
+                  <button
+                    className="sidebar__link"
+                    onClick={() => handleNavigate("Vendor List")}
+                  >
+                    <NavLink
+                      to="/vendors-list"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      Vendor List
+                    </NavLink>
                   </button>
                 </li>
               </ul>
@@ -104,261 +162,209 @@ const Sidebar = ({ onNavigate }) => {
           {/* Admin */}
           <Accordion.Item eventKey="2">
             <Accordion.Header>
-              <UserPlus size={18} className="me-2" /> <span>Admin</span>
-              <ChevronDown className="accordion-arrow" size={16} />
+              <div className="accordion-header-content">
+                <UserPlus size={18} className="accordion-icon" />
+                <span className={`accordion-text ${collapsed ? "d-none" : ""}`}>
+                  Admin
+                </span>
+                <ChevronDown
+                  className={`accordion-arrow ${collapsed ? "d-none" : ""}`}
+                  size={16}
+                />
+              </div>
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className={collapsed ? "d-none" : ""}>
               <ul className="list-unstyled mb-0">
                 <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("User List")}>
-                    <NavLink to="/admin-list" className={({ isActive }) => (isActive ? "active" : "")}> Admin List</NavLink>
-                    
+                  <button
+                    className="sidebar__link"
+                    onClick={() => handleNavigate("User List")}
+                  >
+                    <NavLink
+                      to="/admin-list"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      Admin List
+                    </NavLink>
                   </button>
                 </li>
                 <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("User Create")}>
-                    <NavLink to="/admin-create" className={({ isActive }) => (isActive ? "active" : "")}> Create Admin</NavLink>
-                  </button>
-                </li>
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("User Edit")}>
-                    <NavLink to="/admin-edit" className={({ isActive }) => (isActive ? "active" : "")}> Edit Admin</NavLink>
+                  <button
+                    className="sidebar__link"
+                    onClick={() => handleNavigate("User Create")}
+                  >
+                    <NavLink
+                      to="/admin-create"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      Create Admin
+                    </NavLink>
                   </button>
                 </li>
               </ul>
             </Accordion.Body>
           </Accordion.Item>
-        <hr/>
+
+          {!collapsed && <hr />}
+
           {/* Cars */}
           <Accordion.Item eventKey="11">
             <Accordion.Header>
-            
-              <CarFront size={18} className="me-2" /> <span>Cars</span>
-              <ChevronDown className="accordion-arrow" size={16} />
+              <div className="accordion-header-content">
+                <CarFront size={18} className="accordion-icon" />
+                <span className={`accordion-text ${collapsed ? "d-none" : ""}`}>
+                  Cars
+                </span>
+                <ChevronDown
+                  className={`accordion-arrow ${collapsed ? "d-none" : ""}`}
+                  size={16}
+                />
+              </div>
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className={collapsed ? "d-none" : ""}>
               <ul className="list-unstyled mb-0">
-               
                 <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Cars List")}>
+                  <button
+                    className="sidebar__link"
+                    onClick={() => handleNavigate("Cars List")}
+                  >
                     <List size={16} className="me-2" />
-                    <NavLink to="/cars-list" className={({ isActive }) => (isActive ? "active" : "")}> Cars List</NavLink>
-                  </button>
-                </li>
-                <li>
-                
-                  <button className="sidebar__link" onClick={() => handleNavigate("Add Cars")}>
-                    <Pen size={16} className="me-2" />
-                    <NavLink to="/add-cars" className={({ isActive }) => (isActive ? "active" : "")}>Add Cars</NavLink>
-                  </button>
-                </li>
-              </ul>
-            </Accordion.Body>
-          </Accordion.Item>
-          <hr/>
-          {/* State */}
-          <Accordion.Item eventKey="8">
-            <Accordion.Header>
-              <Landmark size={18} className="me-2" /> <span>State</span>
-              <ChevronDown className="accordion-arrow" size={16} />
-            </Accordion.Header>
-            <Accordion.Body>
-              <ul className="list-unstyled mb-0">
-                <li>
-                  <button className="sidebar__link innerClrs" onClick={() => handleNavigate("States")}>
-                   
-                  </button>
-                </li>
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("States")}>
-                    <Building2 size={16} className="me-2" />
-                    <NavLink to="/states-list" className={({ isActive }) => (isActive ? "active" : "")}> States List</NavLink>
-                  </button>
-                </li>
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("States")}>
-                    <MapPin size={16} className="me-2" />
-                    <NavLink to="/add-states" className={({ isActive }) => (isActive ? "active" : "")}>Add States</NavLink>
+                    <NavLink
+                      to="/cars-list"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      Cars List
+                    </NavLink>
                   </button>
                 </li>
               </ul>
             </Accordion.Body>
           </Accordion.Item>
 
-          {/* Country */}
-          <Accordion.Item eventKey="3">
-            <Accordion.Header>
-              <Globe size={18} className="me-2" /> <span>Country</span>
-              <ChevronDown className="accordion-arrow" size={16} />
-            </Accordion.Header>
-            <Accordion.Body>
-              <ul className="list-unstyled mb-0">
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Countries")}></button>
-                </li>
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Country")}>
-                    <Building2 size={16} className="me-2" />
-                    <NavLink to="/country-list" className={({ isActive }) => (isActive ? "active" : "")}>Country List</NavLink>
-                  </button>
-                </li>
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Country")}>
-                    <MapPin size={16} className="me-2" />
-                    <NavLink to="/add-country" className={({ isActive }) => (isActive ? "active" : "")}>Add Country</NavLink>
-                  </button>
-                </li>
-              </ul>
-            </Accordion.Body>
-          </Accordion.Item>
+          {!collapsed && <hr />}
 
-          {/* City */}
-          <Accordion.Item eventKey="9">
-            <Accordion.Header>
-              <Castle size={18} className="me-2" /> <span>City</span>
-              <ChevronDown className="accordion-arrow" size={16} />
-            </Accordion.Header>
-            <Accordion.Body>
-              <ul className="list-unstyled mb-0">
-                <li>
-                  <button className="sidebar__link innerClrs" onClick={() => handleNavigate("City")}>
-                    <i>City</i>
-                  </button>
-                </li>
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("City")}>
-                    <Castle size={16} className="me-2" />
-                   <NavLink to="/city-list" className={({ isActive }) => (isActive ? "active" : "")}>City List</NavLink>
-                  </button>
-                </li>
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("City")}>
-                    <MapPin size={16} className="me-2" />
-                    <NavLink to="/add-city" className={({ isActive }) => (isActive ? "active" : "")}>Add City</NavLink>
-                  </button>
-                </li>
-              </ul>
-            </Accordion.Body>
-          </Accordion.Item>
-          <hr/>
           {/* Authentication */}
           <Accordion.Item eventKey="4">
             <Accordion.Header>
-              <Fingerprint size={18} className="me-2" /> <span>Authentication</span>
-              <ChevronDown className="accordion-arrow" size={16} />
+              <div className="accordion-header-content">
+                <Fingerprint size={18} className="accordion-icon" />
+                <span className={`accordion-text ${collapsed ? "d-none" : ""}`}>
+                  Authentication
+                </span>
+                <ChevronDown
+                  className={`accordion-arrow ${collapsed ? "d-none" : ""}`}
+                  size={16}
+                />
+              </div>
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className={collapsed ? "d-none" : ""}>
               <ul className="list-unstyled mb-0">
                 <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Sing Up")}>
-                    <NavLink to="/sing-up" className={({ isActive }) => (isActive ? "active" : "")}>Sing Up</NavLink>
+                  <button
+                    className="sidebar__link"
+                    onClick={() => handleNavigate("Sing Up")}
+                  >
+                    <NavLink
+                      to="/sing-up"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      Sign Up
+                    </NavLink>
                   </button>
                 </li>
                 <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Sing In")}>
-                    <NavLink to="/sing-in" className={({ isActive }) => (isActive ? "active" : "")}>Sing In</NavLink>
+                  <button
+                    className="sidebar__link"
+                    onClick={() => handleNavigate("Sing In")}
+                  >
+                    <NavLink
+                      to="/sign-in"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      Sign In
+                    </NavLink>
                   </button>
                 </li>
                 <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Password Reset")}>
-                    <NavLink to="/password-reset" className={({ isActive }) => (isActive ? "active" : "")}>Password Reset</NavLink>
-                  </button>
-                </li>
-              </ul>
-            </Accordion.Body>
-          </Accordion.Item>
-          <hr/>
-           {/* All Setting */}
-           <Accordion.Item eventKey="12">
-            <Accordion.Header>
-              <Settings size={18} className="me-2" /> <span>All Settings</span>
-              <ChevronDown className="accordion-arrow" size={16} />
-            </Accordion.Header>
-            <Accordion.Body>
-              <ul className="list-unstyled mb-0">
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("carsettingsform")}>
-                    <NavLink to="/carsettingsform" className={({ isActive }) => (isActive ? "active" : "")}>Car Settings</NavLink>
-                  </button>
-                </li>
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("locations")}>
-                    <NavLink to="/locations" className={({ isActive }) => (isActive ? "active" : "")}>Add Locations</NavLink>
-                  </button>
-                </li>
-
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("locations")}>
-                    <NavLink to="/email-template" className={({ isActive }) => (isActive ? "active" : "")}>Email Template</NavLink>
-                  </button>
-                </li>
-              </ul>
-            </Accordion.Body>
-          </Accordion.Item>
-          <hr/>
-          {/* Orders */}
-          <Accordion.Item eventKey="5">
-            <Accordion.Header>
-              <ShoppingCart size={18} className="me-2" /> <span>Orders</span>
-              <ChevronDown className="accordion-arrow" size={16} />
-            </Accordion.Header>
-            <Accordion.Body>
-              <ul className="list-unstyled mb-0">
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Order List")}>
-                    <NavLink to="/order-list" className={({ isActive }) => (isActive ? "active" : "")}>Order List</NavLink>
-                  </button>
-                </li>
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Order Create")}>
-                    <NavLink to="/order-create" className={({ isActive }) => (isActive ? "active" : "")}>Add Order</NavLink>
-                  </button>
-                </li>
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Order Edit")}>
-                    <NavLink to="/order-edit" className={({ isActive }) => (isActive ? "active" : "")}>Edit Order</NavLink>
+                  <button
+                    className="sidebar__link"
+                    onClick={() => handleNavigate("Password Reset")}
+                  >
+                    <NavLink
+                      to="/password-reset"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      Password Reset
+                    </NavLink>
                   </button>
                 </li>
               </ul>
             </Accordion.Body>
           </Accordion.Item>
 
-          {/* Reviews */}
-          <Accordion.Item eventKey="6">
+          {!collapsed && <hr />}
+
+          {/* All Settings */}
+          <Accordion.Item eventKey="12">
             <Accordion.Header>
-              <Star size={18} className="me-2" /> <span>Reviews</span>
-              <ChevronDown className="accordion-arrow" size={16} />
+              <div className="accordion-header-content">
+                <Settings size={18} className="accordion-icon" />
+                <span className={`accordion-text ${collapsed ? "d-none" : ""}`}>
+                  All Settings
+                </span>
+                <ChevronDown
+                  className={`accordion-arrow ${collapsed ? "d-none" : ""}`}
+                  size={16}
+                />
+              </div>
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className={collapsed ? "d-none" : ""}>
               <ul className="list-unstyled mb-0">
                 <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Reviews")}>
-                    <NavLink to="/reviews" className={({ isActive }) => (isActive ? "active" : "")}>All Reviews</NavLink>
+                  <button
+                    className="sidebar__link"
+                    onClick={() => handleNavigate("carsettingsform")}
+                  >
+                    <NavLink
+                      to="/carsettingsform"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      Car Settings
+                    </NavLink>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="sidebar__link"
+                    onClick={() => handleNavigate("locations")}
+                  >
+                    <NavLink
+                      to="/locations"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      Add Locations
+                    </NavLink>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="sidebar__link"
+                    onClick={() => handleNavigate("locations")}
+                  >
+                    <NavLink
+                      to="/email-template"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      Email Template
+                    </NavLink>
                   </button>
                 </li>
               </ul>
             </Accordion.Body>
           </Accordion.Item>
 
-          {/* Brands */}
-          <Accordion.Item eventKey="7">
-            <Accordion.Header>
-              <Shield size={18} className="me-2" /> <span>Brands</span>
-              <ChevronDown className="accordion-arrow" size={16} />
-            </Accordion.Header>
-            <Accordion.Body>
-              <ul className="list-unstyled mb-0">
-                <li>
-                  <button className="sidebar__link" onClick={() => handleNavigate("Brands")}>
-                    <NavLink to="/brands" className={({ isActive }) => (isActive ? "active" : "")}>Brand List</NavLink>
-                  </button>
-                </li>
-              </ul>
-            </Accordion.Body>
-          </Accordion.Item>
+          {!collapsed && <hr />}
         </Accordion>
-
-       
       </div>
     </aside>
   );

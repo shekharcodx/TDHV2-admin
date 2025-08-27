@@ -79,7 +79,7 @@ const CarListingPage = () => {
 
   return (
     <div className={`container-fluid ${styles.carListingPage}`}>
-      <h3 className={styles.subTitle}>Car Listings (Admin)</h3>
+      <h3 className={styles.subTitle}>Car Listings</h3>
 
       {/* Tabs */}
       <div className={`d-flex ${styles.tabs}`}>

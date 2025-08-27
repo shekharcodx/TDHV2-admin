@@ -40,7 +40,7 @@
   .HeadingsInr
  {
     color: var(--charcoal-blue-grey-one-color);
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     margin-bottom: 10px;
     text-align: center;
@@ -68,12 +68,12 @@
     cursor: not-allowed;
   }
   
-  ul {
+.containerAdlction ul {
     list-style: none;
     padding-left: 0;
   }
   
-  li {
+.containerAdlction li {
     padding: 6px 10px;
     margin-top: 6px;
     background: #f1f1f1;
