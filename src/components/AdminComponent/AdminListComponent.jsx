@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import styles from "./AdminListComponent.module.css";
 import { Eye, Trash2 } from "lucide-react";
 
-const AdminList = () => {
-  const [admins, setAdmins] = useState([
-    { id: 1, name: "Sajjad Hussain", email: "sajjad@mail.com", role: "Super Admin", status: "Pending" },
-    { id: 2, name: "Ali Khan", email: "ali@mail.com", role: "Moderator", status: "Approve" },
-    { id: 3, name: "John Doe", email: "john@mail.com", role: "Moderator", status: "Rejection" },
-  ]);
-
+const AdminList = ({ admins }) => {
   // ✅ handle status change
   const handleStatusChange = (id, newStatus) => {
     setAdmins((prevAdmins) =>
@@ -60,7 +54,9 @@ const AdminList = () => {
                 <td>
                   <select
                     value={admin.status}
-                    onChange={(e) => handleStatusChange(admin.id, e.target.value)}
+                    onChange={(e) =>
+                      handleStatusChange(admin.id, e.target.value)
+                    }
                     className={styles.statusDropdown}
                   >
                     <option value="Pending">Pending</option>

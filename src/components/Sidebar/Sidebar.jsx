@@ -291,7 +291,7 @@ const Sidebar = ({ onNavigate }) => {
                     onClick={() => handleNavigate("Password Reset")}
                   >
                     <NavLink
-                      to="/password-reset"
+                      to="/reset-pass"
                       className={({ isActive }) => (isActive ? "active" : "")}
                     >
                       Password Reset

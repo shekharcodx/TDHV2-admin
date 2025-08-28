@@ -2,23 +2,26 @@
 
 import React, { useState } from "react";
 import styles from "./ResetPassword.module.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { toaster } from "../../components/ui/toaster";
+import { useResetPasswordMutation } from "../../Services/authApi"; // RTK Query hook
+import { useLocation } from "react-router-dom";
 
 const ResetPassword = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
+  const token = queryParams.get("token");
+
   const [formData, setFormData] = useState({
     password: "",
     confirmPassword: "",
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
-  const location = useLocation();
   const navigate = useNavigate();
-
-  // Example: token comes via query string ?token=abcd123
-  const queryParams = new URLSearchParams(location.search);
-  const token = queryParams.get("token");
+  const [resetPassword] = useResetPasswordMutation();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,48 +29,47 @@ const ResetPassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match!");
+      toaster({
+        variant: "destructive",
+        title: "Error",
+        description: "Passwords do not match!",
+      });
       return;
     }
 
-    if (!token) {
-      setError("Invalid or missing token.");
-      return;
-    }
+    setLoading(true);
 
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/resetPassword`,
+    toaster
+      .promise(
+        resetPassword({
+          newPassword: formData.password,
+          token: token,
+        }).unwrap(),
         {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
+          loading: {
+            title: "Resetting Password",
+            description: "Please wait...",
           },
-          body: JSON.stringify({
-            token: token,
-            newPassword: formData.password,
-          }),
+          success: (result) => {
+            if (result?.code === 9024) {
+              setTimeout(() => navigate("/sign-in"), 3000);
+            }
+            return {
+              title: result?.message || "Password Reset Successful",
+              description: "You can now log in with your new password",
+            };
+          },
+          error: (error) => {
+            return {
+              title: error?.data?.message || "Reset Failed",
+              description: "Please try again later",
+            };
+          },
         }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Something went wrong");
-      }
-
-      setSuccess("Password reset successful! Redirecting to sign-in...");
-      setTimeout(() => navigate("/sign-in"), 2000); // redirect after success
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+      )
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -111,10 +113,6 @@ const ResetPassword = () => {
                     required
                   />
                 </div>
-
-                {/* Error / Success Messages */}
-                {error && <p className="text-danger">{error}</p>}
-                {success && <p className="text-success">{success}</p>}
 
                 {/* Submit Button */}
                 <button

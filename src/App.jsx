@@ -19,6 +19,7 @@ import EmailTemplate from "./pages/Setting/EmailTemplate";
 // Authentication
 import Signin from "./pages/Authentication/Signin";
 import ResetPassword from "./pages/Authentication/ResetPassword";
+import ForgetPassword from "./pages/Authentication/ForgetPassword";
 
 // Protected Route
 import ProtectedRoute from "./routes/ProtectedRoute";
@@ -29,11 +30,12 @@ function App() {
       <Routes>
         {/* Auth Routes  */}
         <Route path="/sign-in" element={<Signin />} />
-        <Route path="/password-reset" element={<ResetPassword />} />
+        <Route path="/reset-pass" element={<ResetPassword />} />
         <Route
           path="/unauthorized"
           element={<h2 className="NotAuthorized">🚫 Not Authorized 404</h2>}
         />
+        <Route path="/forget-password" element={<ForgetPassword />} />
 
         {/* Protected Routes */}
         <Route
