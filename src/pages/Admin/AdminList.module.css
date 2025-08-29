@@ -1,0 +1,21 @@
+/* CSS Variables */
+:root {
+  --charcoal-blue-grey-one-color: #27343a;
+  --slate-gray-secondary-two-color: #5b787c;
+  --misty-teal-three-color: #89b4bc;
+  --light-gray-four-color: #cecccd;
+  --neutral-five-color: #efeeea;
+
+  --gradient-background: linear-gradient(
+    90deg,
+    rgba(91, 120, 124, 1) 0%,
+    rgba(137, 180, 188, 1) 35%
+  );
+}
+.adminListLoader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f4f4;
+}

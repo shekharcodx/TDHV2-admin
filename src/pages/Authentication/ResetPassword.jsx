@@ -123,8 +123,8 @@ const ResetPassword = () => {
                   {loading ? "Resetting..." : "Reset Password"}
                 </button>
 
-                <div className="d-flex justify-content-between mt-4">
-                  <h6 className="mt-2 text-center">OR</h6>
+                <div className="d-flex justify-content-between mt-3">
+                  <h6 className={styles.forgetLink}>Or</h6>
                   <Link to="/sign-in" className={styles.forgetLink}>
                     Sign In
                   </Link>

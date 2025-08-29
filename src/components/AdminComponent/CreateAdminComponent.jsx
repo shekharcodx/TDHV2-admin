@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import styles from "./CreateAdminComponent.module.css";
+import { useCreateAdminMutation } from "../../Services/adminsApi";
+import { toaster } from "../../components/ui/toaster";
+import { useNavigate } from "react-router-dom";
 
 const CreateAdminComponent = () => {
   // State Hook for form data
@@ -7,9 +10,15 @@ const CreateAdminComponent = () => {
     name: "",
     email: "",
     password: "",
-    // role: "Super Admin",
-    // status: "Active",
+    role: "Super Admin",
+    status: "Active",
   });
+
+  // API Hook
+  const [createAdmin, { isLoading }] = useCreateAdminMutation();
+
+  // Navigation Hook
+  const navigate = useNavigate();
 
   // Change Handler Hook
   const handleChange = (e) => {
@@ -21,22 +30,32 @@ const CreateAdminComponent = () => {
   };
 
   // Submit Handler Hook
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
+    try {
+      await createAdmin(formData).unwrap();
 
-    alert(
-      `Admin Created Successfully!\n\nName: ${formData.name}\nEmail: ${formData.email}\nRole: ${formData.role}\nStatus: ${formData.status}`
-    );
+      // ✅ Success Toaster
+      toaster.success(`Admin "${formData.name}" created successfully!`);
 
-    // Reset form after submit
-    setFormData({
-      name: "",
-      email: "",
-      password: "",
-      role: "Super Admin",
-      status: "Active",
-    });
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        role: "Super Admin",
+        status: "Active",
+      });
+
+      // ✅ Redirect after success
+      setTimeout(() => {
+        navigate("/admin-list"); // <-- change route if your list page is different
+      }, 1200);
+    } catch (err) {
+      // ❌ Error Toaster
+      toaster.error("Failed to create admin. Please try again.");
+      console.error("Create Admin Error:", err);
+    }
   };
 
   return (
@@ -50,7 +69,6 @@ const CreateAdminComponent = () => {
             className={`row g-3 ${styles.formCard}`}
           >
             {/* Name */}
-            <div className="row">
             <div className="col-md-4">
               <label className={styles.label}>Name</label>
               <input
@@ -88,9 +106,8 @@ const CreateAdminComponent = () => {
                 required
               />
             </div>
-            </div>
-            {/* <div className="row">
-              
+
+            {/* Role Dropdown */}
             <div className="col-md-6">
               <label className={styles.label}>Role</label>
               <select
@@ -104,26 +121,52 @@ const CreateAdminComponent = () => {
               </select>
             </div>
 
-            
+            {/* Status Pills */}
             <div className="col-md-6">
               <label className={styles.label}>Status</label>
-              <select
-                name="status"
-                className={styles.select}
-                value={formData.status}
-                onChange={handleChange}
-              >
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
-              </select>
+              <div className={styles.pillGroup}>
+                <label
+                  className={`${styles.pill} ${
+                    formData.status === "Active" ? styles.active : ""
+                  }`}
+                >
+                  <input
+                    className="me-1"
+                    type="radio"
+                    name="status"
+                    value="Active"
+                    checked={formData.status === "Active"}
+                    onChange={handleChange}
+                  />
+                  Active
+                </label>
+                &nbsp;&nbsp; &nbsp;
+                <label
+                  className={`${styles.pill} ${
+                    formData.status === "Inactive" ? styles.inactive : ""
+                  }`}
+                >
+                  <input
+                    className="me-1"
+                    type="radio"
+                    name="status"
+                    value="Inactive"
+                    checked={formData.status === "Inactive"}
+                    onChange={handleChange}
+                  />
+                  Inactive
+                </label>
+              </div>
             </div>
-            </div> */}
-           
 
             {/* Submit */}
             <div className="col-12">
-              <button type="submit" className={styles.primaryBtn}>
-                Create Admin
+              <button
+                type="submit"
+                className={styles.primaryBtn}
+                disabled={isLoading}
+              >
+                {isLoading ? "Creating..." : "Create Admin"}
               </button>
             </div>
           </form>

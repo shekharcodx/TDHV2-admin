@@ -137,13 +137,10 @@ const Signin = () => {
                   <Link to="/forget-password" className={styles.forgetLink}>
                     Forget Password?
                   </Link>
-                  <Link to="/" className={styles.forgetLink}>
-                    Sign Up?
+                  <Link to="/reset-pass" className={styles.forgetLink}>
+                    Reset Password ?
                   </Link>
                 </div>
-                <Link to="/reset-pass" className={styles.forgetLink}>
-                  Password Reset?
-                </Link>
               </form>
             </div>
           </div>

@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import styles from "./RecentOrders.module.css";
-import { Eye, Search, ChevronDown, ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
+import {
+  Eye,
+  Search,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  MoreHorizontal,
+} from "lucide-react";
 
 const RecentOrders = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,7 +24,7 @@ const RecentOrders = () => {
       phone: "(+1)-555-1564-261",
       address: "Burr Ridge/Illinois",
       paymentType: "Credit Card",
-      status: "Completed"
+      status: "Completed",
     },
     {
       id: "#RB9652",
@@ -28,7 +35,7 @@ const RecentOrders = () => {
       phone: "(+57)-305-5579-759",
       address: "SULLIVAN/Kentucky",
       paymentType: "Credit Card",
-      status: "Completed"
+      status: "Completed",
     },
     {
       id: "#RB5984",
@@ -39,7 +46,7 @@ const RecentOrders = () => {
       phone: "(+33)-655-5187-93",
       address: "Yreba/Calformia",
       paymentType: "Pay Pal",
-      status: "Completed"
+      status: "Completed",
     },
     {
       id: "#RB3625",
@@ -50,7 +57,7 @@ const RecentOrders = () => {
       phone: "(+30)-693-5553-637",
       address: "Atlanta/Georgia",
       paymentType: "Pay Pal",
-      status: "Processing"
+      status: "Processing",
     },
     {
       id: "#RB8652",
@@ -61,13 +68,13 @@ const RecentOrders = () => {
       phone: "(+91)-855-5446-150",
       address: "Rosenberg/Texas",
       paymentType: "Credit Card",
-      status: "Processing"
-    }
+      status: "Processing",
+    },
   ];
 
   // Filter orders based on search term
-  const filteredOrders = orders.filter(order => 
-    Object.values(order).some(value => 
+  const filteredOrders = orders.filter((order) =>
+    Object.values(order).some((value) =>
       value.toString().toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
@@ -75,7 +82,10 @@ const RecentOrders = () => {
   // Calculate pagination
   const totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedOrders = filteredOrders.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedOrders = filteredOrders.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -88,21 +98,21 @@ const RecentOrders = () => {
       <div className={styles.card}>
         {/* Card Header */}
         <div className={styles.cardHeader}>
-          <h5 className={styles.cardTitle}>Recent Orders</h5>
+          <h5 className={styles.cardTitle}>Recent Car Bookings</h5>
           <div className={styles.headerActions}>
             <div className={styles.searchBox}>
               <Search size={18} className={styles.searchIcon} />
               <input
                 type="text"
-                placeholder="Search orders..."
+                placeholder="Search..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className={styles.searchInput}
               />
             </div>
             <div className={styles.itemsPerPageDropdown}>
-              <select 
-                value={itemsPerPage} 
+              <select
+                value={itemsPerPage}
                 onChange={(e) => setItemsPerPage(Number(e.target.value))}
                 className={styles.itemsSelect}
               >
@@ -138,27 +148,49 @@ const RecentOrders = () => {
                   <td className={styles.product}>{order.product}</td>
                   <td className={styles.customer}>
                     <div className={styles.customerInfo}>
-                      <div className={styles.customerName}>{order.customerName}</div>
-                      <div className={styles.customerAddress}>{order.address}</div>
+                      <div className={styles.customerName}>
+                        {order.customerName}
+                      </div>
+                      <div className={styles.customerAddress}>
+                        {order.address}
+                      </div>
                     </div>
                   </td>
                   <td className={styles.contact}>
                     <div className={styles.contactInfo}>
-                      <a href={`mailto:${order.email}`} className={styles.contactEmail}>
+                      <a
+                        href={`mailto:${order.email}`}
+                        className={styles.contactEmail}
+                      >
                         {order.email}
                       </a>
-                      <a href={`tel:${order.phone.replace(/[^+\d]/g, '')}`} className={styles.contactPhone}>
+                      <a
+                        href={`tel:${order.phone.replace(/[^+\d]/g, "")}`}
+                        className={styles.contactPhone}
+                      >
                         {order.phone}
                       </a>
                     </div>
                   </td>
                   <td className={styles.payment}>
-                    <span className={`${styles.paymentBadge} ${order.paymentType === 'Credit Card' ? styles.creditCard : styles.paypal}`}>
+                    <span
+                      className={`${styles.paymentBadge} ${
+                        order.paymentType === "Credit Card"
+                          ? styles.creditCard
+                          : styles.paypal
+                      }`}
+                    >
                       {order.paymentType}
                     </span>
                   </td>
                   <td className={styles.status}>
-                    <span className={`${styles.statusBadge} ${order.status === 'Completed' ? styles.completed : styles.processing}`}>
+                    <span
+                      className={`${styles.statusBadge} ${
+                        order.status === "Completed"
+                          ? styles.completed
+                          : styles.processing
+                      }`}
+                    >
                       {order.status}
                     </span>
                   </td>
@@ -179,30 +211,38 @@ const RecentOrders = () => {
         {/* Card Footer */}
         <div className={styles.cardFooter}>
           <div className={styles.footerInfo}>
-            Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredOrders.length)} of {filteredOrders.length} entries
+            Showing {startIndex + 1} to{" "}
+            {Math.min(startIndex + itemsPerPage, filteredOrders.length)} of{" "}
+            {filteredOrders.length} entries
           </div>
           <div className={styles.pagination}>
-            <button 
-              className={`${styles.pageBtn} ${currentPage === 1 ? styles.disabled : ''}`}
+            <button
+              className={`${styles.pageBtn} ${
+                currentPage === 1 ? styles.disabled : ""
+              }`}
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
             >
               <ChevronLeft size={16} />
               <span>Previous</span>
             </button>
-            
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
                 key={page}
-                className={`${styles.pageBtn} ${currentPage === page ? styles.active : ''}`}
+                className={`${styles.pageBtn} ${
+                  currentPage === page ? styles.active : ""
+                }`}
                 onClick={() => handlePageChange(page)}
               >
                 {page}
               </button>
             ))}
-            
-            <button 
-              className={`${styles.pageBtn} ${currentPage === totalPages ? styles.disabled : ''}`}
+
+            <button
+              className={`${styles.pageBtn} ${
+                currentPage === totalPages ? styles.disabled : ""
+              }`}
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
             >

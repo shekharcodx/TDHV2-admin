@@ -2,6 +2,7 @@ import { baseApi } from "./baseApi";
 
 export const adminsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // ✅ GET all admins
     getAdmins: builder.query({
       query: () => ({
         url: "/admins",
@@ -9,7 +10,31 @@ export const adminsApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Admins"],
     }),
+
+    // ✅ Create new admin
+    createAdmin: builder.mutation({
+      query: (admin) => ({
+        url: "/admin",
+        method: "POST",
+        body: admin,
+      }),
+      invalidatesTags: ["Admins"],
+    }),
+
+    // ✅ Update active/inactive status
+    profileActiveStatus: builder.mutation({
+      query: ({ id, isActive }) => ({
+        url: "/profileActiveStatus",
+        method: "PUT",
+        body: { id, isActive },
+      }),
+      invalidatesTags: ["Admins"],
+    }),
   }),
 });
 
-export const { useGetAdminsQuery } = adminsApi;
+export const {
+  useGetAdminsQuery,
+  useCreateAdminMutation,
+  useProfileActiveStatusMutation,
+} = adminsApi;
