@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./CarForm.module.css";
+import styles from "./Carform.module.css";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
 const CarForm = () => {
@@ -29,7 +29,14 @@ const CarForm = () => {
   };
 
   const submitBrandData = () => {
-    alert("All Brands:\n" + JSON.stringify(brands.map((b) => b.name), null, 2));
+    alert(
+      "All Brands:\n" +
+        JSON.stringify(
+          brands.map((b) => b.name),
+          null,
+          2
+        )
+    );
   };
 
   // ------------------ MODEL ------------------ //
@@ -71,7 +78,11 @@ const CarForm = () => {
     }
     alert(
       `Models for ${brandObj.name}:\n` +
-        JSON.stringify(brandObj.models.map((m) => m.name), null, 2)
+        JSON.stringify(
+          brandObj.models.map((m) => m.name),
+          null,
+          2
+        )
     );
   };
 
@@ -162,7 +173,7 @@ const CarForm = () => {
 
   return (
     // <div className={styles.containerCarform}>
-       <div className={`container ${styles.formWrapper}`}>
+    <div className={`container ${styles.formWrapper}`}>
       <div className={styles.yours}>
         <h1 className={styles.carSettingsTitle}>Update Setting Listing</h1>
       </div>
