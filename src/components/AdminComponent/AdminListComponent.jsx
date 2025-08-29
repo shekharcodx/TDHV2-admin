@@ -35,6 +35,8 @@ const AdminList = ({ admins }) => {
       )
     );
 
+    console.log("Id is ", id);
+
     // API call with Promises
     profileActiveStatus({ id, isActive: newStatus })
       .unwrap()

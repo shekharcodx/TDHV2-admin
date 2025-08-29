@@ -26,7 +26,7 @@ export const adminsApi = baseApi.injectEndpoints({
       query: ({ id, isActive }) => ({
         url: "/profileActiveStatus",
         method: "PUT",
-        body: { id, isActive },
+        body: { userId: id, isActive },
       }),
       invalidatesTags: ["Admins"],
     }),
