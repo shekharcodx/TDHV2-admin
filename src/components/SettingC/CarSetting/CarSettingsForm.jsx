@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import styles from './CarSettingsForm.module.css';
+import React, { useState, useEffect } from "react";
+import styles from "./CarSettingsForm.module.css";
+// import { useCarBrandsQuery } from "../../../Services/carBrands";
 
 const CarSettingsForm = () => {
+  // const { data: carBrands, isLoading: carBrandsLoading } = useCarBrandsQuery();
+
   // Main form state with arrays for multiple entries
   const [formData, setFormData] = useState({
     brands: [],
@@ -17,74 +20,71 @@ const CarSettingsForm = () => {
     otherFeatures: [],
     doors: [],
     transmissions: [],
-    fuelTypes: []
+    fuelTypes: [],
   });
 
   // Current input values
   const [currentInputs, setCurrentInputs] = useState({
-    selectedBrand: '',
-    selectedModel: '',
-    selectedTrim: '',
-    brand: '',
-    model: '',
-    trim: '',
-    year: '',
-    bodyType: '',
-    regionalSpec: '',
-    horsePower: '',
-    seatingCapacity: '',
-    color: '',
-    techFeature: '',
-    otherFeature: '',
-    door: '',
-    transmission: '',
-    fuelType: ''
+    selectedBrand: "",
+    selectedModel: "",
+    selectedTrim: "",
+    brand: "",
+    model: "",
+    trim: "",
+    year: "",
+    bodyType: "",
+    regionalSpec: "",
+    horsePower: "",
+    seatingCapacity: "",
+    color: "",
+    techFeature: "",
+    otherFeature: "",
+    door: "",
+    transmission: "",
+    fuelType: "",
   });
-
-  
- 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCurrentInputs(prev => ({
+    setCurrentInputs((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
 
     // Handle dependent dropdowns
-    if (name === 'selectedBrand') {
-      setCurrentInputs(prev => ({
+    if (name === "selectedBrand") {
+      setCurrentInputs((prev) => ({
         ...prev,
-        selectedModel: '',
-        selectedTrim: ''
+        selectedModel: "",
+        selectedTrim: "",
       }));
-    } else if (name === 'selectedModel') {
-      setCurrentInputs(prev => ({
+    } else if (name === "selectedModel") {
+      setCurrentInputs((prev) => ({
         ...prev,
-        selectedTrim: ''
+        selectedTrim: "",
       }));
     }
   };
 
   const addToArray = (fieldName, value) => {
     if (!value.trim()) return;
-    
-    setFormData(prev => ({
+
+    setFormData((prev) => ({
       ...prev,
-      [fieldName]: [...prev[fieldName], value.trim()]
+      [fieldName]: [...prev[fieldName], value.trim()],
     }));
-    
+
     // Clear the input
-    setCurrentInputs(prev => ({
+    setCurrentInputs((prev) => ({
       ...prev,
-      [fieldName.slice(0, -1)]: ''
+      [fieldName.slice(0, -1)]: "",
     }));
   };
 
   const removeFromArray = (fieldName, index) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [fieldName]: prev[fieldName].filter((_, i) => i !== index)
+      [fieldName]: prev[fieldName].filter((_, i) => i !== index),
     }));
   };
 
@@ -103,27 +103,27 @@ const CarSettingsForm = () => {
       otherFeatures: [],
       doors: [],
       transmissions: [],
-      fuelTypes: []
+      fuelTypes: [],
     });
 
     setCurrentInputs({
-      selectedBrand: '',
-      selectedModel: '',
-      selectedTrim: '',
-      brand: '',
-      model: '',
-      trim: '',
-      year: '',
-      bodyType: '',
-      regionalSpec: '',
-      horsePower: '',
-      seatingCapacity: '',
-      color: '',
-      techFeature: '',
-      otherFeature: '',
-      door: '',
-      transmission: '',
-      fuelType: ''
+      selectedBrand: "",
+      selectedModel: "",
+      selectedTrim: "",
+      brand: "",
+      model: "",
+      trim: "",
+      year: "",
+      bodyType: "",
+      regionalSpec: "",
+      horsePower: "",
+      seatingCapacity: "",
+      color: "",
+      techFeature: "",
+      otherFeature: "",
+      door: "",
+      transmission: "",
+      fuelType: "",
     });
   };
 
@@ -133,15 +133,15 @@ const CarSettingsForm = () => {
       selectedBrand: currentInputs.selectedBrand,
       selectedModel: currentInputs.selectedModel,
       selectedTrim: currentInputs.selectedTrim,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
-    
-    console.log('Form Data Result:', result);
-    alert('Data saved successfully! Check console for details.');
-    
+
+    console.log("Form Data Result:", result);
+    alert("Data saved successfully! Check console for details.");
+
     // Clear form after submit
     clearForm();
-    
+
     return result;
   };
 
@@ -150,7 +150,9 @@ const CarSettingsForm = () => {
   // };
 
   const getAvailableTrims = () => {
-    return currentInputs.selectedModel ? modelTrimData[currentInputs.selectedModel] || [] : [];
+    return currentInputs.selectedModel
+      ? modelTrimData[currentInputs.selectedModel] || []
+      : [];
   };
 
   return (
@@ -162,15 +164,11 @@ const CarSettingsForm = () => {
 
         <div className={styles.carSettingsForm}>
           {/* Dependent Brand, Model, Trim Selection */}
-          
-          {/* Brand Management */}
-          
 
-       
+          {/* Brand Management */}
 
           {/* Trim and Years */}
           <div className={styles.carSettingsRow}>
-
             <div className={styles.carSettingsColHalf}>
               <label className={styles.carSettingsLabel}>Add Years</label>
               <div className={styles.carSettingsInputGroup}>
@@ -185,7 +183,7 @@ const CarSettingsForm = () => {
                 <button
                   type="button"
                   className={styles.carSettingsAddBtn}
-                  onClick={() => addToArray('years', currentInputs.year)}
+                  onClick={() => addToArray("years", currentInputs.year)}
                 >
                   <span className={styles.carSettingsIcon}>+</span>
                   Add
@@ -196,7 +194,9 @@ const CarSettingsForm = () => {
                   {formData.years.map((item, index) => (
                     <span key={index} className={styles.carSettingsTag}>
                       {item}
-                      <button onClick={() => removeFromArray('years', index)}>×</button>
+                      <button onClick={() => removeFromArray("years", index)}>
+                        ×
+                      </button>
                     </span>
                   ))}
                 </div>
@@ -220,7 +220,9 @@ const CarSettingsForm = () => {
                 <button
                   type="button"
                   className={styles.carSettingsAddBtn}
-                  onClick={() => addToArray('bodyTypes', currentInputs.bodyType)}
+                  onClick={() =>
+                    addToArray("bodyTypes", currentInputs.bodyType)
+                  }
                 >
                   <span className={styles.carSettingsIcon}>+</span>
                   Add
@@ -231,7 +233,11 @@ const CarSettingsForm = () => {
                   {formData.bodyTypes.map((item, index) => (
                     <span key={index} className={styles.carSettingsTag}>
                       {item}
-                      <button onClick={() => removeFromArray('bodyTypes', index)}>×</button>
+                      <button
+                        onClick={() => removeFromArray("bodyTypes", index)}
+                      >
+                        ×
+                      </button>
                     </span>
                   ))}
                 </div>
@@ -239,7 +245,9 @@ const CarSettingsForm = () => {
             </div>
 
             <div className={styles.carSettingsColHalf}>
-              <label className={styles.carSettingsLabel}>Add Regional Specs</label>
+              <label className={styles.carSettingsLabel}>
+                Add Regional Specs
+              </label>
               <div className={styles.carSettingsInputGroup}>
                 <input
                   type="text"
@@ -252,7 +260,9 @@ const CarSettingsForm = () => {
                 <button
                   type="button"
                   className={styles.carSettingsAddBtn}
-                  onClick={() => addToArray('regionalSpecs', currentInputs.regionalSpec)}
+                  onClick={() =>
+                    addToArray("regionalSpecs", currentInputs.regionalSpec)
+                  }
                 >
                   <span className={styles.carSettingsIcon}>+</span>
                   Add
@@ -263,7 +273,11 @@ const CarSettingsForm = () => {
                   {formData.regionalSpecs.map((item, index) => (
                     <span key={index} className={styles.carSettingsTag}>
                       {item}
-                      <button onClick={() => removeFromArray('regionalSpecs', index)}>×</button>
+                      <button
+                        onClick={() => removeFromArray("regionalSpecs", index)}
+                      >
+                        ×
+                      </button>
                     </span>
                   ))}
                 </div>
@@ -287,7 +301,9 @@ const CarSettingsForm = () => {
                 <button
                   type="button"
                   className={styles.carSettingsAddBtn}
-                  onClick={() => addToArray('horsePowers', currentInputs.horsePower)}
+                  onClick={() =>
+                    addToArray("horsePowers", currentInputs.horsePower)
+                  }
                 >
                   <span className={styles.carSettingsIcon}>+</span>
                   Add
@@ -298,7 +314,11 @@ const CarSettingsForm = () => {
                   {formData.horsePowers.map((item, index) => (
                     <span key={index} className={styles.carSettingsTag}>
                       {item}
-                      <button onClick={() => removeFromArray('horsePowers', index)}>×</button>
+                      <button
+                        onClick={() => removeFromArray("horsePowers", index)}
+                      >
+                        ×
+                      </button>
                     </span>
                   ))}
                 </div>
@@ -306,7 +326,9 @@ const CarSettingsForm = () => {
             </div>
 
             <div className={styles.carSettingsColHalf}>
-              <label className={styles.carSettingsLabel}>Add Seating Capacity</label>
+              <label className={styles.carSettingsLabel}>
+                Add Seating Capacity
+              </label>
               <div className={styles.carSettingsInputGroup}>
                 <input
                   type="text"
@@ -319,7 +341,12 @@ const CarSettingsForm = () => {
                 <button
                   type="button"
                   className={styles.carSettingsAddBtn}
-                  onClick={() => addToArray('seatingCapacities', currentInputs.seatingCapacity)}
+                  onClick={() =>
+                    addToArray(
+                      "seatingCapacities",
+                      currentInputs.seatingCapacity
+                    )
+                  }
                 >
                   <span className={styles.carSettingsIcon}>+</span>
                   Add
@@ -330,7 +357,13 @@ const CarSettingsForm = () => {
                   {formData.seatingCapacities.map((item, index) => (
                     <span key={index} className={styles.carSettingsTag}>
                       {item}
-                      <button onClick={() => removeFromArray('seatingCapacities', index)}>×</button>
+                      <button
+                        onClick={() =>
+                          removeFromArray("seatingCapacities", index)
+                        }
+                      >
+                        ×
+                      </button>
                     </span>
                   ))}
                 </div>
@@ -354,7 +387,7 @@ const CarSettingsForm = () => {
                 <button
                   type="button"
                   className={styles.carSettingsAddBtn}
-                  onClick={() => addToArray('colors', currentInputs.color)}
+                  onClick={() => addToArray("colors", currentInputs.color)}
                 >
                   <span className={styles.carSettingsIcon}>+</span>
                   Add
@@ -365,7 +398,9 @@ const CarSettingsForm = () => {
                   {formData.colors.map((item, index) => (
                     <span key={index} className={styles.carSettingsTag}>
                       {item}
-                      <button onClick={() => removeFromArray('colors', index)}>×</button>
+                      <button onClick={() => removeFromArray("colors", index)}>
+                        ×
+                      </button>
                     </span>
                   ))}
                 </div>
@@ -373,7 +408,9 @@ const CarSettingsForm = () => {
             </div>
 
             <div className={styles.carSettingsColHalf}>
-              <label className={styles.carSettingsLabel}>Add Tech Features</label>
+              <label className={styles.carSettingsLabel}>
+                Add Tech Features
+              </label>
               <div className={styles.carSettingsInputGroup}>
                 <input
                   type="text"
@@ -386,7 +423,9 @@ const CarSettingsForm = () => {
                 <button
                   type="button"
                   className={styles.carSettingsAddBtn}
-                  onClick={() => addToArray('techFeatures', currentInputs.techFeature)}
+                  onClick={() =>
+                    addToArray("techFeatures", currentInputs.techFeature)
+                  }
                 >
                   <span className={styles.carSettingsIcon}>+</span>
                   Add
@@ -397,7 +436,11 @@ const CarSettingsForm = () => {
                   {formData.techFeatures.map((item, index) => (
                     <span key={index} className={styles.carSettingsTag}>
                       {item}
-                      <button onClick={() => removeFromArray('techFeatures', index)}>×</button>
+                      <button
+                        onClick={() => removeFromArray("techFeatures", index)}
+                      >
+                        ×
+                      </button>
                     </span>
                   ))}
                 </div>
@@ -408,7 +451,9 @@ const CarSettingsForm = () => {
           {/* Other Features and Doors */}
           <div className={styles.carSettingsRow}>
             <div className={styles.carSettingsColHalf}>
-              <label className={styles.carSettingsLabel}>Add Other Features</label>
+              <label className={styles.carSettingsLabel}>
+                Add Other Features
+              </label>
               <div className={styles.carSettingsInputGroup}>
                 <input
                   type="text"
@@ -421,7 +466,9 @@ const CarSettingsForm = () => {
                 <button
                   type="button"
                   className={styles.carSettingsAddBtn}
-                  onClick={() => addToArray('otherFeatures', currentInputs.otherFeature)}
+                  onClick={() =>
+                    addToArray("otherFeatures", currentInputs.otherFeature)
+                  }
                 >
                   <span className={styles.carSettingsIcon}>+</span>
                   Add
@@ -432,7 +479,11 @@ const CarSettingsForm = () => {
                   {formData.otherFeatures.map((item, index) => (
                     <span key={index} className={styles.carSettingsTag}>
                       {item}
-                      <button onClick={() => removeFromArray('otherFeatures', index)}>×</button>
+                      <button
+                        onClick={() => removeFromArray("otherFeatures", index)}
+                      >
+                        ×
+                      </button>
                     </span>
                   ))}
                 </div>
@@ -453,7 +504,7 @@ const CarSettingsForm = () => {
                 <button
                   type="button"
                   className={styles.carSettingsAddBtn}
-                  onClick={() => addToArray('doors', currentInputs.door)}
+                  onClick={() => addToArray("doors", currentInputs.door)}
                 >
                   <span className={styles.carSettingsIcon}>+</span>
                   Add
@@ -464,7 +515,9 @@ const CarSettingsForm = () => {
                   {formData.doors.map((item, index) => (
                     <span key={index} className={styles.carSettingsTag}>
                       {item}
-                      <button onClick={() => removeFromArray('doors', index)}>×</button>
+                      <button onClick={() => removeFromArray("doors", index)}>
+                        ×
+                      </button>
                     </span>
                   ))}
                 </div>
@@ -475,7 +528,9 @@ const CarSettingsForm = () => {
           {/* Transmission and Fuel Type */}
           <div className={styles.carSettingsRow}>
             <div className={styles.carSettingsColHalf}>
-              <label className={styles.carSettingsLabel}>Add Transmission</label>
+              <label className={styles.carSettingsLabel}>
+                Add Transmission
+              </label>
               <div className={styles.carSettingsInputGroup}>
                 <input
                   type="text"
@@ -488,7 +543,9 @@ const CarSettingsForm = () => {
                 <button
                   type="button"
                   className={styles.carSettingsAddBtn}
-                  onClick={() => addToArray('transmissions', currentInputs.transmission)}
+                  onClick={() =>
+                    addToArray("transmissions", currentInputs.transmission)
+                  }
                 >
                   <span className={styles.carSettingsIcon}>+</span>
                   Add
@@ -499,7 +556,11 @@ const CarSettingsForm = () => {
                   {formData.transmissions.map((item, index) => (
                     <span key={index} className={styles.carSettingsTag}>
                       {item}
-                      <button onClick={() => removeFromArray('transmissions', index)}>×</button>
+                      <button
+                        onClick={() => removeFromArray("transmissions", index)}
+                      >
+                        ×
+                      </button>
                     </span>
                   ))}
                 </div>
@@ -520,7 +581,9 @@ const CarSettingsForm = () => {
                 <button
                   type="button"
                   className={styles.carSettingsAddBtn}
-                  onClick={() => addToArray('fuelTypes', currentInputs.fuelType)}
+                  onClick={() =>
+                    addToArray("fuelTypes", currentInputs.fuelType)
+                  }
                 >
                   <span className={styles.carSettingsIcon}>+</span>
                   Add
@@ -531,7 +594,11 @@ const CarSettingsForm = () => {
                   {formData.fuelTypes.map((item, index) => (
                     <span key={index} className={styles.carSettingsTag}>
                       {item}
-                      <button onClick={() => removeFromArray('fuelTypes', index)}>×</button>
+                      <button
+                        onClick={() => removeFromArray("fuelTypes", index)}
+                      >
+                        ×
+                      </button>
                     </span>
                   ))}
                 </div>
@@ -542,8 +609,8 @@ const CarSettingsForm = () => {
           {/* Submit Button */}
           <div className={styles.carSettingsRow}>
             <div className={styles.carSettingsColFull}>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className={styles.carSettingsSubmitBtn}
                 onClick={handleSubmit}
               >

@@ -3,6 +3,7 @@ import styles from "./CarListing.module.css";
 import { Eye } from "lucide-react";
 import { Modal, Button } from "react-bootstrap";
 import CarImg from "../../assets/car.jpeg";
+import { useAllListingsQuery } from "../../Services/carListingApi";
 
 const CarListingPage = () => {
   const [cars, setCars] = useState([
@@ -61,6 +62,9 @@ const CarListingPage = () => {
   const [activeTab, setActiveTab] = useState("Pending");
   const [selectedCar, setSelectedCar] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const { data, isLoading, error } = useAllListingsQuery();
+
+  // console.log(data);
 
   const handleStatusChange = (id, newStatus) => {
     setCars((prevCars) =>
@@ -113,24 +117,24 @@ const CarListingPage = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredCars.map((car, index) => (
-              <tr key={car.id}>
+            {data?.listings?.docs?.map((car, index) => (
+              <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{car.vendor}</td>
+                <td>{car.vendor.name}</td>
                 <td>
                   <img
-                    src={car.image}
+                    src={car.car.images[0].url}
                     alt={car.carMake}
                     className={styles.carThumbnail}
                   />
                 </td>
-                <td>{car.carMake}</td>
-                <td>{car.model}</td>
-                <td>{car.year}</td>
-                <td>{car.price}</td>
+                <td>{car.car.carBrand.name}</td>
+                <td>{car.car.carBrand.carModel.name}</td>
+                <td>{car.car.carBrand.carModel.details.modelYear}</td>
+                <td>{car.rentPerDay}</td>
                 <td>
                   <select
-                    value={car.status}
+                    value={car.isActive}
                     onChange={(e) => handleStatusChange(car.id, e.target.value)}
                     className={styles.statusDropdown}
                   >
@@ -164,16 +168,29 @@ const CarListingPage = () => {
           {selectedCar && (
             <div className={styles.carDetails}>
               <img
-                src={selectedCar.image}
+                src={selectedCar.car.images[0].url}
                 alt={selectedCar.carMake}
                 className={styles.carLargeImage}
               />
-              <p><strong>Vendor:</strong> {selectedCar.vendor}</p>
-              <p><strong>Car Make:</strong> {selectedCar.carMake}</p>
-              <p><strong>Model:</strong> {selectedCar.model}</p>
-              <p><strong>Year:</strong> {selectedCar.year}</p>
-              <p><strong>Price:</strong> {selectedCar.price}</p>
-              <p><strong>Status:</strong> {selectedCar.status}</p>
+              <p>
+                <strong>Vendor:</strong> {selectedCar.vendor.name}
+              </p>
+              <p>
+                <strong>Car Make:</strong> {selectedCar.car.carBrand.name}
+              </p>
+              <p>
+                <strong>Model:</strong> {selectedCar.car.carBrand.carModel.name}
+              </p>
+              <p>
+                <strong>Year:</strong>{" "}
+                {selectedCar.car.carBrand.carModel.details.modelYear}
+              </p>
+              <p>
+                <strong>Price:</strong> {selectedCar.rentPerDay}
+              </p>
+              <p>
+                <strong>Status:</strong> {selectedCar.isActive}
+              </p>
             </div>
           )}
         </Modal.Body>

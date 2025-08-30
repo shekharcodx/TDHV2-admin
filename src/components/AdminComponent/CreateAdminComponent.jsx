@@ -43,8 +43,6 @@ const CreateAdminComponent = () => {
         name: "",
         email: "",
         password: "",
-        role: "Super Admin",
-        status: "Active",
       });
 
       // ✅ Redirect after success
@@ -107,57 +105,7 @@ const CreateAdminComponent = () => {
               />
             </div>
 
-            {/* Role Dropdown */}
-            <div className="col-md-6">
-              <label className={styles.label}>Role</label>
-              <select
-                name="role"
-                className={styles.select}
-                value={formData.role}
-                onChange={handleChange}
-              >
-                <option value="Super Admin">Super Admin</option>
-                <option value="Moderator">Moderator</option>
-              </select>
-            </div>
-
             {/* Status Pills */}
-            <div className="col-md-6">
-              <label className={styles.label}>Status</label>
-              <div className={styles.pillGroup}>
-                <label
-                  className={`${styles.pill} ${
-                    formData.status === "Active" ? styles.active : ""
-                  }`}
-                >
-                  <input
-                    className="me-1"
-                    type="radio"
-                    name="status"
-                    value="Active"
-                    checked={formData.status === "Active"}
-                    onChange={handleChange}
-                  />
-                  Active
-                </label>
-                &nbsp;&nbsp; &nbsp;
-                <label
-                  className={`${styles.pill} ${
-                    formData.status === "Inactive" ? styles.inactive : ""
-                  }`}
-                >
-                  <input
-                    className="me-1"
-                    type="radio"
-                    name="status"
-                    value="Inactive"
-                    checked={formData.status === "Inactive"}
-                    onChange={handleChange}
-                  />
-                  Inactive
-                </label>
-              </div>
-            </div>
 
             {/* Submit */}
             <div className="col-12">

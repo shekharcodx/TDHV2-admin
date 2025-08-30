@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import styles from "./AddLocations.module.css";
 import { Button, Form } from "react-bootstrap";
-
+import {
+  useAllCountriesQuery,
+  useAddCountryMutation,
+  useDeleteCountryMutation,
+} from "../../../Services/countriesApi";
 
 const AddLocations = () => {
   // State to manage countries, states, and cities
+
+  const { data, isLoading } = useAllCountriesQuery();
+  const [addCountry] = useAddCountryMutation();
+  const [deleteCountry] = useDeleteCountryMutation();
+
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState({});
   const [cities, setCities] = useState({});
@@ -19,12 +28,12 @@ const AddLocations = () => {
   const [cityInput, setCityInput] = useState("");
 
   // --- Add Handlers ---
-  const addCountry = () => {
-    if (countryInput && !countries.includes(countryInput)) {
-      setCountries([...countries, countryInput]);
-      setCountryInput("");
-    }
-  };
+  // const addCountry = () => {
+  //   if (countryInput && !countries.includes(countryInput)) {
+  //     setCountries([...countries, countryInput]);
+  //     setCountryInput("");
+  //   }
+  // };
 
   const addState = () => {
     if (selectedCountry && stateInput) {
@@ -98,7 +107,7 @@ const AddLocations = () => {
   return (
     <div className={`${styles.containerAdlction} container`}>
       <h2 className={styles.HeadingsInr}>Add Location</h2>
-    {/* className={styles.gradientBtn  mb-4 text-center} */}
+      {/* className={styles.gradientBtn  mb-4 text-center} */}
       {/* prevent default submit to avoid page refresh */}
       <Form onSubmit={(e) => e.preventDefault()}>
         {/* COUNTRY SECTION */}
@@ -114,7 +123,7 @@ const AddLocations = () => {
             <Button
               type="button"
               className={styles.btnAddcntry}
-              onClick={addCountry}
+              onClick={() => addCountry(countryInput)}
               disabled={!countryInput}
             >
               Add Country
@@ -250,7 +259,11 @@ const AddLocations = () => {
 
         {/* SUBMIT BUTTON */}
         <div className="text-center mt-4">
-          <Button type="button" className={styles.submitBtn} onClick={handleSubmit}>
+          <Button
+            type="button"
+            className={styles.submitBtn}
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
         </div>
@@ -258,8 +271,5 @@ const AddLocations = () => {
     </div>
   );
 };
-
-
-
 
 export default AddLocations;

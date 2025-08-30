@@ -1,28 +1,69 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Carform.module.css";
 import { Button, Form, InputGroup } from "react-bootstrap";
+import {
+  useAllCarBrandsQuery,
+  useDeleteCarBrandMutation,
+} from "../../../Services/carBrands";
+
+import { useAddCarBrandMutation } from "../../../Services/carBrands";
 
 const CarForm = () => {
+  const { data: carBrands, isLoading: carBrandsLoading } =
+    useAllCarBrandsQuery();
+  const [deleteCarBrand] = useDeleteCarBrandMutation();
+
   const [brands, setBrands] = useState([]);
   const [brandInput, setBrandInput] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
-
+  const [addCarBrand, { isLoading }] = useAddCarBrandMutation();
   const [modelInput, setModelInput] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
-
+  const [brandImage, setBrandImage] = useState(null);
   const [trimInput, setTrimInput] = useState("");
+  const handleImageChange = (e) => {
+    setBrandImage(e.target.files[0]); // save file in state
+  };
 
+  useEffect(() => {
+    if (carBrands) {
+      setBrands(carBrands.carBrands);
+    }
+  }, [carBrands]);
   // ------------------ BRAND ------------------ //
-  const addBrand = () => {
-    if (brandInput.trim() !== "") {
-      setBrands([...brands, { name: brandInput, models: [] }]);
+  // const addBrand = () => {
+  //   if (brandInput.trim() !== "") {
+  //     setBrands([...brands, { name: brandInput, models: [] }]);
+  //     setBrandInput("");
+  //   }
+  // };
+
+  const addBrand = async () => {
+    if (!brandInput || !brandImage) {
+      alert("Please enter brand name and select image");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("name", brandInput);
+    formData.append("image", brandImage);
+
+    try {
+      await addCarBrand(formData).unwrap();
+      alert("Brand added successfully!");
       setBrandInput("");
+      setBrandImage(null);
+    } catch (error) {
+      console.error("Error adding brand:", error);
+      alert("Failed to add brand");
     }
   };
 
-  const deleteBrand = (brandName) => {
-    setBrands(brands.filter((b) => b.name !== brandName));
-    if (selectedBrand === brandName) {
+  const deleteBrand = (brand) => {
+    const id = brand._id;
+    deleteCarBrand(id);
+    setBrands(brands.filter((b) => b.name !== brand.name));
+    if (selectedBrand === brand.name) {
       setSelectedBrand("");
       setSelectedModel("");
     }
@@ -193,14 +234,14 @@ const CarForm = () => {
               Add Brand
             </Button>
           </InputGroup>
+          <div>
+            <input type="file" onChange={handleImageChange} />
+          </div>
 
           {brands.map((b, i) => (
             <div key={i} className={styles.listItem}>
               <span>{b.name}</span>
-              <span
-                className={styles.deleteBtn}
-                onClick={() => deleteBrand(b.name)}
-              >
+              <span className={styles.deleteBtn} onClick={() => deleteBrand(b)}>
                 ❌
               </span>
             </div>

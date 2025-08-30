@@ -108,7 +108,7 @@ const AdminList = ({ admins }) => {
         <table className={`table ${styles.adminTable}`}>
           <thead>
             <tr className={styles.AdminListTableHeadersC + " table-secondary"}>
-              <th>#</th>
+              <th>#-No</th>
               <th>Name</th>
               <th>Email</th>
               <th>Status</th>
