@@ -23,7 +23,7 @@ export const carBrandsApi = baseApi.injectEndpoints({
     // Add new car brand with image
     addCarBrand: builder.mutation({
       query: (formData) => ({
-        url: "/carBrands",
+        url: "/carBrand",
         method: "POST",
         body: formData,
       }),

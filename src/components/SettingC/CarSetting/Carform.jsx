@@ -44,9 +44,11 @@ const CarForm = () => {
       return;
     }
 
+    console.log("Carform:", { brandInput, brandImage });
+
     const formData = new FormData();
     formData.append("name", brandInput);
-    formData.append("image", brandImage);
+    formData.append("logo", brandImage);
 
     try {
       await addCarBrand(formData).unwrap();
