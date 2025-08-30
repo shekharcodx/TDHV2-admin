@@ -110,7 +110,7 @@ const AddLocations = () => {
       {/* className={styles.gradientBtn  mb-4 text-center} */}
       {/* prevent default submit to avoid page refresh */}
       <Form onSubmit={(e) => e.preventDefault()}>
-        {/* COUNTRY SECTION */}
+        {/* COUNTRY SECTION   */}
         <div className={styles.section}>
           <h4>Add Country</h4>
           <div className="d-flex mb-2">
