@@ -8,16 +8,16 @@ export const carBrandsApi = baseApi.injectEndpoints({
         url: "/carBrands",
         method: "GET",
       }),
-      providesTags: ["carBrands"],
+      providesTags: ["carBrand"],
     }),
 
     // Delete car brand by id
     deleteCarBrand: builder.mutation({
       query: (id) => ({
-        url: `/carBrands/${id}`,
+        url: `/carBrand/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["carBrands"],
+      invalidatesTags: ["carBrand"],
     }),
 
     // Add new car brand with image
@@ -27,7 +27,35 @@ export const carBrandsApi = baseApi.injectEndpoints({
         method: "POST",
         body: formData,
       }),
-      invalidatesTags: ["carBrands"],
+      invalidatesTags: ["carBrand"],
+    }),
+
+    // Fetch car models by brand_id
+    fetchModels: builder.query({
+      query: (brand_id) => ({
+        url: `/carModels/${brand_id}`,
+        method: "GET",
+      }),
+      providesTags: ["carModels"],
+    }),
+
+    // Add new car models for a brand
+    addCarModels: builder.mutation({
+      query: ({ brandId, names }) => ({
+        url: "/carModels",
+        method: "POST",
+        body: { brandId, names }, // names should be array of strings
+      }),
+      invalidatesTags: ["carModels"],
+    }),
+
+    // Delete car model by id
+    deleteCarModel: builder.mutation({
+      query: (id) => ({
+        url: `/carModel/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["carModels"], // refresh models after delete
     }),
   }),
 });
@@ -36,4 +64,7 @@ export const {
   useAllCarBrandsQuery,
   useDeleteCarBrandMutation,
   useAddCarBrandMutation,
+  useFetchModelsQuery,
+  useAddCarModelsMutation,
+  useDeleteCarModelMutation, // 👈 new hook
 } = carBrandsApi;

@@ -5,18 +5,29 @@ import {
   useAllCarBrandsQuery,
   useDeleteCarBrandMutation,
 } from "../../../Services/carBrands";
-
+import { Spinner } from "@chakra-ui/react";
 import { useAddCarBrandMutation } from "../../../Services/carBrands";
+import { useFetchModelsQuery } from "../../../Services/carBrands";
+import {
+  useAddCarModelsMutation,
+  useDeleteCarModelMutation,
+} from "../../../Services/carBrands";
 
 const CarForm = () => {
   const { data: carBrands, isLoading: carBrandsLoading } =
     useAllCarBrandsQuery();
   const [deleteCarBrand] = useDeleteCarBrandMutation();
-
+  const [brandId, setBrandID] = useState();
+  const { data: models } = useFetchModelsQuery(brandId, {
+    skip: !brandId,
+  });
+  const [deleteCarModel] = useDeleteCarModelMutation();
+  const [addCarModels] = useAddCarModelsMutation();
+  const [carModels, setCarModel] = useState();
   const [brands, setBrands] = useState([]);
   const [brandInput, setBrandInput] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
-  const [addCarBrand, { isLoading }] = useAddCarBrandMutation();
+  const [addCarBrand, { isLoading: addingBrand }] = useAddCarBrandMutation();
   const [modelInput, setModelInput] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
   const [brandImage, setBrandImage] = useState(null);
@@ -26,18 +37,17 @@ const CarForm = () => {
   };
 
   useEffect(() => {
+    if (models) {
+      setCarModel(models.carModels);
+    }
+  }, [models]);
+
+  useEffect(() => {
     if (carBrands) {
       setBrands(carBrands.carBrands);
     }
   }, [carBrands]);
   // ------------------ BRAND ------------------ //
-  // const addBrand = () => {
-  //   if (brandInput.trim() !== "") {
-  //     setBrands([...brands, { name: brandInput, models: [] }]);
-  //     setBrandInput("");
-  //   }
-  // };
-
   const addBrand = async () => {
     if (!brandInput || !brandImage) {
       alert("Please enter brand name and select image");
@@ -99,18 +109,22 @@ const CarForm = () => {
     setModelInput("");
   };
 
+  const addCarModelRequest = async () => {
+    if (!brandId || modelInput === "") return alert("Missing brand or models");
+    try {
+      await addCarModels({ brandId, names: [modelInput] }).unwrap();
+      alert("Models added successfully!");
+      setModelInput("");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to add models");
+    }
+  };
+
   const deleteModel = (modelName) => {
-    setBrands((prev) =>
-      prev.map((brand) =>
-        brand.name === selectedBrand
-          ? {
-              ...brand,
-              models: brand.models.filter((m) => m.name !== modelName),
-            }
-          : brand
-      )
-    );
-    if (selectedModel === modelName) setSelectedModel("");
+    const id = modelName._id;
+    deleteCarModel(id);
+    setCarModel(carModels.filter((m) => m._id !== id));
   };
 
   const submitModelData = () => {
@@ -233,7 +247,16 @@ const CarForm = () => {
               placeholder="Enter car brand"
             />
             <Button className={styles.gradientBtn} onClick={addBrand}>
-              Add Brand
+              {addingBrand ? (
+                <div className={styles.adminListLoader}>
+                  <Spinner
+                    color="red.500"
+                    css={{ "--spinner-track-color": "colors.gray.200" }}
+                  />
+                </div>
+              ) : (
+                "Add Brand"
+              )}
             </Button>
           </InputGroup>
           <div>
@@ -264,11 +287,16 @@ const CarForm = () => {
           <Form.Select
             className="mb-2"
             value={selectedBrand}
-            onChange={(e) => setSelectedBrand(e.target.value)}
+            onChange={(e) => {
+              const index = parseInt(e.target.value, 10);
+              const brandID = brands[index]._id;
+              setSelectedBrand(index);
+              setBrandID(brandID);
+            }}
           >
             <option value="">Select Brand</option>
             {brands.map((b, i) => (
-              <option key={i} value={b.name}>
+              <option key={i} value={i}>
                 {b.name}
               </option>
             ))}
@@ -286,24 +314,21 @@ const CarForm = () => {
             </Button>
           </InputGroup>
 
-          {brands
-            .find((b) => b.name === selectedBrand)
-            ?.models.map((m, i) => (
-              <div key={i} className={styles.listItem}>
-                <span>{m.name}</span>
-                <span
-                  className={styles.deleteBtn}
-                  onClick={() => deleteModel(m.name)}
-                >
-                  ❌
-                </span>
-              </div>
-            ))}
+          {carModels?.map((m, i) => (
+            <div key={i} className={styles.listItem}>
+              <span>{m.name}</span>
+              <span className={styles.deleteBtn} onClick={() => deleteModel(m)}>
+                ❌
+              </span>
+            </div>
+          ))}
 
           <Button
             type="button"
             className={`${styles.gradientBtn} mt-2`}
-            onClick={submitModelData}
+            onClick={() => {
+              addCarModelRequest();
+            }}
           >
             Save Models
           </Button>
@@ -318,13 +343,13 @@ const CarForm = () => {
             onChange={(e) => setSelectedModel(e.target.value)}
           >
             <option value="">Select Model</option>
-            {brands
+            {/* {brands
               .find((b) => b.name === selectedBrand)
-              ?.models.map((m, i) => (
+              ?.models?.map((m, i) => (
                 <option key={i} value={m.name}>
                   {m.name}
                 </option>
-              ))}
+              ))} */}
           </Form.Select>
 
           <InputGroup className="mb-2">
@@ -339,7 +364,7 @@ const CarForm = () => {
             </Button>
           </InputGroup>
 
-          {brands
+          {/* {brands
             .find((b) => b.name === selectedBrand)
             ?.models.find((m) => m.name === selectedModel)
             ?.trims.map((t, i) => (
@@ -352,7 +377,7 @@ const CarForm = () => {
                   ❌
                 </span>
               </div>
-            ))}
+            ))} */}
 
           <Button
             type="button"
